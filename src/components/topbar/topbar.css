@@ -82,6 +82,10 @@
   cursor: pointer;
 }
 
+.topbarLink a{
+  color: white;
+}
+
 .topbarIcons {
   display: flex;
 }

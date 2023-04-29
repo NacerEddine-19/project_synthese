@@ -39,11 +39,11 @@ export default function Topbar() {
       <div className="topbarRight">
         <div className="topbarIcons">
           <div className="topbarIconItem">
-            <Person />
+          <DropdownNotif item={<Person />} />
             <span className="topbarIconBadge">1</span>
           </div>
           <div className="topbarIconItem">
-            <Chat />
+          <DropdownNotif item={<Chat />} />
             <span className="topbarIconBadge">2</span>
           </div>
           <div className="topbarIconItem">
