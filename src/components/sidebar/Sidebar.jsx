@@ -2,11 +2,11 @@ import "./sidebar.css";
 import {
   RssFeed,
   Chat,
-  PlayCircleFilledOutlined,
+  // PlayCircleFilledOutlined,
   Group,
   Bookmark,
-  HelpOutline,
-  WorkOutline,
+  // HelpOutline,
+  // WorkOutline,
   Event,
   School,
 } from "@material-ui/icons";

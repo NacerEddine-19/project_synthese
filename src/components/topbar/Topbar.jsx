@@ -1,4 +1,5 @@
 import "./topbar.css";
+import DropdownNotif from "../notification/Notification";
 import {
   Search,
   Person,
@@ -8,12 +9,13 @@ import {
   School
 } from "@material-ui/icons";
 import SourceRoundedIcon from '@mui/icons-material/SourceRounded';
+import { Link } from "react-router-dom";
 
 export default function Topbar() {
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
-        <span className="logo"><img src="/assets/ofppt-logo/png/logo-no-background.png" alt="logo" className="logo-img" /></span>
+        <span className="logo"><Link to={`/`}><img src="/assets/ofppt-logo/png/logo-no-background.png" alt="logo" className="logo-img" /></Link></span>
         <div className="searchbar">
           <Search className="searchIcon" />
           <input
@@ -22,12 +24,18 @@ export default function Topbar() {
           />
         </div>
       </div>
-        <div className="topbarCenter">
-          <span className="topbarLink"><HomeRounded /></span>
-          <span className="topbarLink"><SourceRoundedIcon /></span>
-          <span className="topbarLink"><School /></span>
+      <div className="topbarCenter">
+        <span className="topbarLink"><Link to={`/`}>
+          <HomeRounded />
+        </Link></span>
+        <span className="topbarLink"><Link to={`/Projects`}>
+          <SourceRoundedIcon />
+        </Link></span>
+        <span className="topbarLink"><Link to={`/Courses`}>
+          <School />
+        </Link></span>
 
-        </div>
+      </div>
       <div className="topbarRight">
         <div className="topbarIcons">
           <div className="topbarIconItem">
@@ -39,10 +47,10 @@ export default function Topbar() {
             <span className="topbarIconBadge">2</span>
           </div>
           <div className="topbarIconItem">
-            <Notifications />
+            <DropdownNotif item={<Notifications />} />
             <span className="topbarIconBadge">1</span>
           </div>
-          <img src="/assets/person/1.jpeg" alt="" className="topbarImg" />
+          <Link to={`/Profile`}><img src="/assets/person/1.jpeg" alt="" className="topbarImg" /></Link>
         </div>
       </div>
     </div>
