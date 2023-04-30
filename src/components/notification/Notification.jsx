@@ -1,33 +1,23 @@
 import './notif.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Dropdown } from 'react-bootstrap';
 
 const notification = [
     'Action',
     'Another action',
     'Something else here'
-]
+];
 
-export default function DropdownNotif({ item }) {
+export default function MyDropdown({ item }) {
     return (
-        <div className="dropdown">
-            <button
-                className="btnNotif"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-            >
+        <Dropdown>
+            <Dropdown.Toggle variant="success" className='btnNotif'>
                 {item}
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
                 {notification.map((item, index) => (
-                    <li key={index}>
-                        <p className="dropdown-item" href="#">
-                            {item}
-                        </p>
-                    </li>
+                    <Dropdown.Item key={index}>{item}</Dropdown.Item>
                 ))}
-            </ul>
-        </div>
+            </Dropdown.Menu>
+        </Dropdown>
     );
 }

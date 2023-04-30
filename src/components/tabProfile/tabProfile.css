@@ -1,0 +1,71 @@
+.p30 {
+    padding: 30px !important;
+}
+
+.tab-block {
+    position: relative;
+}
+
+.tab-block .tab-content {
+    overflow: auto;
+    position: relative;
+    z-index: 10;
+    min-height: 125px;
+    padding: 16px 12px;
+    border: 1px solid #e2e2e2;
+    background-color: #FFF;
+}
+
+.tab-block .nav-tabs {
+    position: relative;
+    border: 0;
+}
+
+.tab-block .nav-tabs>li {
+    float: left;
+    margin-bottom: -1px;
+}
+
+.tab-block .nav-tabs>li>a {
+    z-index: 9;
+    position: relative;
+    color: #AAA;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 14px 20px;
+    margin-right: -1px;
+    border-color: #e2e2e2;
+    border-radius: 0;
+    background: #fafafa;
+}
+
+.tab-block .nav-tabs>li:first-child>a {
+    margin-left: 0;
+}
+
+.tab-block .nav-tabs>li>a:hover {
+    background-color: #f4f4f4;
+}
+
+.tab-block .nav-tabs>li.active>a,
+.tab-block .nav-tabs>li.active>a:hover,
+.tab-block .nav-tabs>li.active>a:focus {
+    cursor: default;
+    position: relative;
+    z-index: 12;
+    color: #555555;
+    background: #FFF;
+    border-color: #e2e2e2;
+    border-bottom: 1px solid #FFF;
+}
+
+.tab-block .tabs-right>li.active>a,
+.tab-block .tabs-right>li.active>a:hover,
+.tab-block .tabs-right>li.active>a:focus {
+    color: #555;
+    border-color: #DDD #DDD #DDD #FFF;
+    cursor: default;
+    position: relative;
+    z-index: 12;
+    background: #FFF;
+}

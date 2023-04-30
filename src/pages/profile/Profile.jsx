@@ -3,6 +3,7 @@ import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
+import TabProfile from "../../components/tabProfile/tabProfile";
 
 export default function Profile() {
   return (
@@ -30,6 +31,7 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
+          <TabProfile content={<Feed />}/>
             <Feed />
             <Rightbar profile/>
           </div>

@@ -1,7 +1,10 @@
-export default function Test({handleFileChange}) {
+// import MyDropdown from "../../components/notification/Notification";
+import TabProfile from "../../components/tabProfile/tabProfile";
+
+export default function Test() {
     return (
         <div>
-            <input type="file" onChange={handleFileChange} />
+            <TabProfile/>
         </div>
     );
 }

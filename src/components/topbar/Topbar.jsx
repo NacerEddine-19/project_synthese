@@ -1,5 +1,5 @@
 import "./topbar.css";
-import DropdownNotif from "../notification/Notification";
+import MyDropdown from "../notification/Notification";
 import {
   Search,
   Person,
@@ -39,15 +39,15 @@ export default function Topbar() {
       <div className="topbarRight">
         <div className="topbarIcons">
           <div className="topbarIconItem">
-          <DropdownNotif item={<Person />} />
+            <MyDropdown item={<Person />} />
             <span className="topbarIconBadge">1</span>
           </div>
           <div className="topbarIconItem">
-          <DropdownNotif item={<Chat />} />
+            <MyDropdown item={<Chat />} />
             <span className="topbarIconBadge">2</span>
           </div>
           <div className="topbarIconItem">
-            <DropdownNotif item={<Notifications />} />
+            <MyDropdown item={<Notifications />} />
             <span className="topbarIconBadge">1</span>
           </div>
           <Link to={`/Profile`}><img src="/assets/person/1.jpeg" alt="" className="topbarImg" /></Link>

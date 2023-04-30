@@ -1,7 +1,28 @@
-.btnNotif{
+.btnNotif:hover,
+.btnNotif:focus,
+.btnNotif:active {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.btn-check:active+.btn-success,
+.btn-check:checked+.btn-success,
+.btn-success.active,
+.btn-success:active,
+.show>.btn-success.dropdown-toggle {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.btnNotif {
     padding: 0;
     margin: 0;
     color: #fff;
     background-color: transparent;
-    border:none;
+    border: none;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
 }

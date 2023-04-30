@@ -10,8 +10,10 @@ import {
 import SourceRoundedIcon from '@mui/icons-material/SourceRounded';
 import { Users } from "../../dummyData";
 import CloseFriend from "../closeFriend/CloseFriend";
+import Socials from "../socials/socials";
 
 export default function Sidebar() {
+  const pathname = window.location.pathname;
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -46,12 +48,13 @@ export default function Sidebar() {
           </li>
         </ul>
         <button className="sidebarButton">Show More</button>
+        {pathname === '/Profile' ? (< Socials />) : ''}
         <hr className="sidebarHr" />
-        <ul className="sidebarFriendList">
+        {pathname !== '/Profile' ? <ul className="sidebarFriendList">
           {Users.map((u) => (
             <CloseFriend key={u.id} user={u} />
           ))}
-        </ul>
+        </ul> : ''}
       </div>
     </div>
   );
