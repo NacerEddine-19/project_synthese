@@ -32,7 +32,6 @@ export default function Profile() {
           </div>
           <div className="profileRightBottom">
           <TabProfile content={<Feed />}/>
-            <Feed />
             <Rightbar profile/>
           </div>
         </div>

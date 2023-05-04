@@ -21,6 +21,8 @@
     color: #fff;
     background-color: transparent;
     border: none;
+    height: 32px;
+    width: 32px;
 }
 
 .dropdown-toggle::after {

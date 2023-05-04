@@ -1,7 +1,7 @@
 .login {
   width: 100vw;
   height: 100vh;
-  background-color: #f0f2f5;
+  background-color: var(--bs-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +35,7 @@
 .loginBox{
     height: 400px;
     padding: 20px;
-    background-color: white;
+    background-color: var(--bs-light);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -58,7 +58,7 @@
     height: 50px;
     border-radius: 10px;
     border: none;
-    background-color: #1775ee;
+    background-color: var(--bs-primary);
     color: white;
     font-size: 20px;
     font-weight: 500;

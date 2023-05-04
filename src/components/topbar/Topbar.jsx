@@ -1,5 +1,6 @@
 import "./topbar.css";
 import MyDropdown from "../notification/Notification";
+import ThemeSwitch from "../theme_switch/themeSwitch";
 import {
   Search,
   Person,
@@ -10,6 +11,12 @@ import {
 } from "@material-ui/icons";
 import SourceRoundedIcon from '@mui/icons-material/SourceRounded';
 import { Link } from "react-router-dom";
+
+const notification = [
+  'Action',
+  'Another action',
+  'Something else here'
+];
 
 export default function Topbar() {
   return (
@@ -39,19 +46,20 @@ export default function Topbar() {
       <div className="topbarRight">
         <div className="topbarIcons">
           <div className="topbarIconItem">
-            <MyDropdown item={<Person />} />
-            <span className="topbarIconBadge">1</span>
+            <MyDropdown item={<Person />} notif={notification} />
+            <span className="topbarIconBadge">{notif.length}</span>
           </div>
           <div className="topbarIconItem">
-            <MyDropdown item={<Chat />} />
-            <span className="topbarIconBadge">2</span>
+            <MyDropdown item={<Chat />} notif={notification} />
+            <span className="topbarIconBadge">{notif.length}</span>
           </div>
           <div className="topbarIconItem">
-            <MyDropdown item={<Notifications />} />
-            <span className="topbarIconBadge">1</span>
+            <MyDropdown item={<Notifications />} notif={notification} />
+            <span className="topbarIconBadge">{notif.length}</span>
           </div>
-          <Link to={`/Profile`}><img src="/assets/person/1.jpeg" alt="" className="topbarImg" /></Link>
         </div>
+        <Link to={`/Profile`}><img src="/assets/person/1.jpeg" alt="" className="topbarImg" /></Link>
+        <ThemeSwitch />
       </div>
     </div>
   );

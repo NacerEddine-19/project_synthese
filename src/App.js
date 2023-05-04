@@ -4,6 +4,7 @@ import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import Test from "./pages/testing/test";
 import { BrowserRouter as Router,Routes, Route } from 'react-router-dom';
+import MainDash from "./pages/adminPages/mainPage/mainPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Test" element={<Test />} />
+        <Route path="/adminDash" element={<MainDash />} />
       </Routes>
     </Router>
   );
