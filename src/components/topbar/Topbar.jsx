@@ -47,15 +47,15 @@ export default function Topbar() {
         <div className="topbarIcons">
           <div className="topbarIconItem">
             <MyDropdown item={<Person />} notif={notification} />
-            <span className="topbarIconBadge">{notif.length}</span>
+            <span className="topbarIconBadge">{notification.length}</span>
           </div>
           <div className="topbarIconItem">
             <MyDropdown item={<Chat />} notif={notification} />
-            <span className="topbarIconBadge">{notif.length}</span>
+            <span className="topbarIconBadge">{notification.length}</span>
           </div>
           <div className="topbarIconItem">
             <MyDropdown item={<Notifications />} notif={notification} />
-            <span className="topbarIconBadge">{notif.length}</span>
+            <span className="topbarIconBadge">{notification.length}</span>
           </div>
         </div>
         <Link to={`/Profile`}><img src="/assets/person/1.jpeg" alt="" className="topbarImg" /></Link>
