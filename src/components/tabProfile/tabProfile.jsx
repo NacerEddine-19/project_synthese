@@ -22,8 +22,8 @@ export default function TabProfile({ content, activeTab, handleTabClick }) {
                             Projects
                         </a>
                     </li>
-                    <li className={activeTab === 'corses' ? 'active' : ''}>
-                        <a href="#corses" data-toggle="corses" onClick={() => handleTabClick('corses')}>
+                    <li className={activeTab === 'courses' ? 'active' : ''}>
+                        <a href="#courses" data-toggle="courses" onClick={() => handleTabClick('courses')}>
                             Courses
                         </a>
                     </li>

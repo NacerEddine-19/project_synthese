@@ -1,11 +1,12 @@
 import "./profile.css";
+import { useState } from "react";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import TabProfile from "../../components/tabProfile/tabProfile";
 import FriendsTable from "../../components/friendList/FriendList";
-import { useState } from "react";
+import Courses from "../../components/courses/courses";
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState('feed');
@@ -42,8 +43,8 @@ export default function Profile() {
               <>
                 {activeTab === 'feed' && <Feed />}
                 {activeTab === 'friends' && <FriendsTable />}
-                {/* {activeTab === 'projects' && <Projects />}
                 {activeTab === 'courses' && <Courses />}
+                {/* {activeTab === 'projects' && <Projects />}
                 {activeTab === 'favorites' && <Favorites />} */}
               </>
             }
