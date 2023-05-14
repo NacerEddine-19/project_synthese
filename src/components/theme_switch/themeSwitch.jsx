@@ -2,14 +2,18 @@ import './themeSwitch.css';
 import { useState, useEffect } from 'react';
 
 export default function ThemeSwitch() {
-    const [theme, setTheme] = useState(
-        window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? 'dark'
-            : 'light'
-    );
+    const getInitialTheme = () => {
+        const savedTheme = localStorage.getItem('theme');
+        return savedTheme ? savedTheme : (
+            window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        );
+    };
+
+    const [theme, setTheme] = useState(getInitialTheme());
 
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
     }, [theme]);
 
     const toggleTheme = () => {

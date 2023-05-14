@@ -1,12 +1,16 @@
 import { useState, useCallback } from "react";
 import request from "../../utils/request";
+
 import "./login.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const history = useNavigate();
+
   const SERVER_API = process.env.REACT_APP_SERVER_API;
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("majid.nacereddine@ofppt-edu.ma");
+  const [password, setPassword] = useState("123");
 
   const handleSubmit = useCallback(
     async (event) => {
@@ -16,13 +20,21 @@ export default function Login() {
           email,
           password,
         });
-        console.log(response.data);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("role", response.data.role);
+        // Redirect the user to the appropriate route based on their role
+        if (response.data.role === "admin" || response.data.role === "user") {
+          history.push("/home");
+        } else if (response.data.role === "superAdmin") {
+          history.push("/adminDash");
+        }
       } catch (error) {
         console.error(error);
       }
     },
-    [email, password, SERVER_API]
+    [email, password, SERVER_API, history]
   );
+
 
   const handleEmailChange = useCallback((event) => {
     setEmail(event.target.value);
@@ -38,7 +50,7 @@ export default function Login() {
         <div className="loginLeft">
           <h3 className="loginLogo">The OFPPT Social Network</h3>
           <span className="loginDesc">
-          Connect, Learn, Grow
+            Connect, Learn, Grow
           </span>
         </div>
         <div className="wrapper fadeInDown">

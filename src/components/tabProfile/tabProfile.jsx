@@ -1,12 +1,7 @@
-import { useState } from 'react';
 import './tabProfile.css';
 
-export default function TabProfile({ content }) {
-    const [activeTab, setActiveTab] = useState('feed');
+export default function TabProfile({ content, activeTab, handleTabClick }) {
 
-    const handleTabClick = (tab) => {
-        setActiveTab(tab);
-    };
 
     return (
         <div className="col-md-8">

@@ -16,13 +16,11 @@ export default function Share() {
       setFile(file);
       e.target.value = '';
     }
-    console.log(file);
   };
 
   const handleCloseImage = (e) => {
     setFile();
   }
-  console.log(file);
 
   const handleUploadClick = () => {
     if (!file) {
