@@ -7,13 +7,17 @@ import Rightbar from "../../components/rightbar/Rightbar";
 import TabProfile from "../../components/tabProfile/tabProfile";
 import FriendsTable from "../../components/friendList/FriendList";
 import Courses from "../../components/courses/courses";
+import getUser from "../../utils/helper";
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState('feed');
+  const user = getUser();
+  console.log(user);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+
   return (
     <>
       <Topbar />

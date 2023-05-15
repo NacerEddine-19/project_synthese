@@ -385,7 +385,7 @@ input[type=text]:placeholder {
 
 
 @media only screen and (width < 650px) {
-  #icon{
+  #icon {
     aspect-ratio: 3/1;
   }
 }

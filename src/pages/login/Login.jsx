@@ -1,39 +1,77 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import request from "../../utils/request";
 
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const SERVER_API = process.env.REACT_APP_SERVER_API;
 
   const [email, setEmail] = useState("majid.nacereddine@ofppt-edu.ma");
   const [password, setPassword] = useState("123");
+  const [user, setUser] = useState();
 
-  const handleSubmit = useCallback(
-    async (event) => {
-      event.preventDefault();
-      try {
-        const response = await request.post(`${SERVER_API}/login`, {
-          email,
-          password,
-        });
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("role", response.data.role);
-        // Redirect the user to the appropriate route based on their role
-        if (response.data.role === "admin" || response.data.role === "user") {
-          history.push("/home");
-        } else if (response.data.role === "superAdmin") {
-          history.push("/adminDash");
-        }
-      } catch (error) {
-        console.error(error);
+  useEffect(() => {
+    if (user) {
+      const userStr = JSON.stringify(user);
+      const role = user.role;
+      if (!localStorage.getItem('user')) {
+        localStorage.setItem("user", userStr);
       }
-    },
-    [email, password, SERVER_API, history]
-  );
+      if (!localStorage.getItem('role')) {
+        localStorage.setItem("role", role);
+      }
+    }
+    if (["admin", "stagier"].includes(localStorage.getItem('role'))) {
+      try {
+        navigate("/");
+      } catch (ex) {
+        window.location.reload(true)
+      }
+    } else if (localStorage.getItem('role') === "superAdmin") {
+      try {
+        navigate("/adminDash");
+      } catch (ex) {
+        window.location.reload(true)
+      }
+    }
+    return () => {
+    };
+  }, [user, navigate]);
+
+  async function handleSubmit(event) {
+
+    event.preventDefault();
+    try {
+      await request.post(`${SERVER_API}/login`, {
+        email,
+        password,
+      })
+        .then(response => {
+          if (response.status === 200) {
+            const data = response.data;
+            return data;
+          } else {
+            console.error('Error occurred during login');
+          }
+        }
+        ).then(data => {
+          if (data) {
+            return data[0];
+          }
+        }).then(data => {
+          setUser(data);
+        }
+        );
+
+
+    } catch (error) {
+      console.error(error);
+    }
+
+  };
 
 
   const handleEmailChange = useCallback((event) => {

@@ -13,8 +13,19 @@ export default function Rightbar({ profile }) {
               <b>Mercredi 26 avril 2023</b> Forum International de l'Etudiant - Casablanca
           </span>
           </div>
+          <div className="event">
+            <img className="event-img" src="assets/ofppt e.png" alt="event" />
+            <span className="eventText">
+              <b>Mercredi 26 avril 2023</b> Forum International de l'Etudiant - Casablanca
+          </span>
+          </div>
+          <div className="event">
+            <img className="event-img" src="assets/ofppt e.png" alt="event" />
+            <span className="eventText">
+              <b>Mercredi 26 avril 2023</b> Forum International de l'Etudiant - Casablanca
+          </span>
+          </div>
         </div>
-        <img className="rightbarAd" src="assets/ad.png" alt="ad" />
         <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendList">
           {Users.map((u) => (

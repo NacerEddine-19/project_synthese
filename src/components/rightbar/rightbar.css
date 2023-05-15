@@ -9,11 +9,12 @@
 .event {
   display: flex;
   align-items: center;
+  margin-bottom: 15px;
 }
 
 .event-img {
   width: 60px;
-  height: 70px;
+  height: 50px;
   margin-right: 10px;
 }
 

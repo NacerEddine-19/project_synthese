@@ -18,6 +18,13 @@ const notification = [
   'Something else here'
 ];
 
+const userProfileNotif = [
+  'Profile',
+  'Settings',
+  'Language',
+  'Log out'
+];
+
 export default function Topbar() {
   return (
     <div className="topbarContainer">
@@ -58,7 +65,8 @@ export default function Topbar() {
             <span className="topbarIconBadge">{notification.length}</span>
           </div>
         </div>
-        <Link to={`/Profile`}><img src="/assets/person/1.jpeg" alt="" className="topbarImg" /></Link>
+        <MyDropdown item={<img src="/assets/person/1.jpeg" alt="" className="topbarImg" />} notif={userProfileNotif} />
+        {/* <Link to={`/Profile`}><img src="/assets/person/1.jpeg" alt="" className="topbarImg" /></Link> */}
         <ThemeSwitch />
       </div>
     </div>

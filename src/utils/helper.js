@@ -1,16 +1,14 @@
-import jwtDecode from 'jwt-decode';
 
-const PERSIST_KEY = 'userInfo';
-const getUser = (token) => {
+const getUser = () => {
     try {
-        const jwt = token ? token : localStorage.getItem(PERSIST_KEY);
-        if (jwt !== null) {
-            const userDecoded = jwtDecode(jwt);
-            return userDecoded;
+        let user = localStorage.getItem('user');
+        if (!user) {
+            return null;
         }
-        return null;
+        user = JSON.parse(user)
+        return user;
     } catch (ex) {
-        return null;
+        return ex;
     }
 };
 

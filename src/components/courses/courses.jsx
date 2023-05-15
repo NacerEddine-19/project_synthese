@@ -33,7 +33,7 @@ export default function CoursesComponent() {
         <div className="container courses">
             <div className="coursesWraper">
                 <div className="row justify-content-center mt-4">
-                    <div className="col-lg-6 col-md-8 col-sm-10">
+                    <div className="col-lg-6 col-md-8 col-sm-10 justify-content-between">
                         <div className="input-group mb-3">
                             <input
                                 type="text"
