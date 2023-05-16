@@ -8,6 +8,7 @@ import TabProfile from "../../components/tabProfile/tabProfile";
 import FriendsTable from "../../components/friendList/FriendList";
 import Courses from "../../components/courses/courses";
 import getUser from "../../utils/helper";
+import Projects from "../projects/projects";
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState('feed');
@@ -48,8 +49,8 @@ export default function Profile() {
                 {activeTab === 'feed' && <Feed />}
                 {activeTab === 'friends' && <FriendsTable />}
                 {activeTab === 'courses' && <Courses />}
-                {/* {activeTab === 'projects' && <Projects />}
-                {activeTab === 'favorites' && <Favorites />} */}
+                {/* {activeTab === 'projects' && <Projects />} */}
+                {/* {activeTab === 'favorites' && <Favorites />} */}
               </>
             }
               activeTab={activeTab}

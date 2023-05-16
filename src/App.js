@@ -7,6 +7,7 @@ import Projects from './pages/projects/projects';
 import LogOut from './components/logOut/logOut';
 import MainDash from './pages/adminPages/mainPage/mainPage';
 import { UserRoutes, AdminRoutes } from './Routes/Routes';
+import PageNotFound from './pages/page not found/pageNotFound';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route element={<AdminRoutes />}>
           <Route exact path="/adminDash" element={<MainDash />} />
         </Route>
+        <Route path='*' element={<PageNotFound />}></Route>
       </Routes>
     </Router>
   );
