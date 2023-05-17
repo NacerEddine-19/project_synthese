@@ -7,12 +7,12 @@ import Rightbar from "../../components/rightbar/Rightbar";
 import TabProfile from "../../components/tabProfile/tabProfile";
 import FriendsTable from "../../components/friendList/FriendList";
 import Courses from "../../components/courses/courses";
-import getUser from "../../utils/helper";
-import Projects from "../projects/projects";
+// import Projects from "../projects/projects";
+import { useLocation } from "react-router-dom";
 
 export default function Profile() {
-  const [activeTab, setActiveTab] = useState('feed');
-  const user = getUser();
+  const locat = useLocation().hash.slice(1);
+  const [activeTab, setActiveTab] = useState(locat ? locat : 'feed');
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
