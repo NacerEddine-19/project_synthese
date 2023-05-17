@@ -13,7 +13,6 @@ import Projects from "../projects/projects";
 export default function Profile() {
   const [activeTab, setActiveTab] = useState('feed');
   const user = getUser();
-  console.log(user);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);

@@ -1,9 +1,49 @@
 import React, { useState } from 'react';
 import './freindstable.css';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import request from '../../utils/request';
+import { useEffect } from 'react';
+import getUser from '../../utils/helper';
 
 const FriendsTable = () => {
     const [searchTerm, setSearchTerm] = useState('');
+    const [user, setUser] = useState(getUser());
+    const [friends, setFriends] = useState()
+    const [user_id, setUser_id] = useState()
+    const [isLoading, setIsLoading] = useState(false);
+    const SERVER_API = process.env.REACT_APP_SERVER_API;
+
+    useEffect(() => {
+        setUser_id(user.id);
+        console.log(user_id);
+        return () => {
+            setUser_id(null);
+        };
+    }, [user]);
+
+    useEffect(() => {
+        setIsLoading(true);
+        request.post(`${SERVER_API}/friends`, {
+            user_id
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    const data = response.data;
+                    return data;
+                } else {
+                    console.error('Error occurred during login');
+                }
+            }
+            ).then(data => {
+                setFriends(data);
+            }
+            )
+            .finally(() => { setIsLoading(false); });
+        return () => {
+            setFriends(null);
+        };
+    }, [user_id]);
+
     const friendsList = [
         {
             id: 1,
@@ -82,8 +122,8 @@ const FriendsTable = () => {
         setSearchTerm(event.target.value);
     };
 
-    const filteredFriends = friendsList.filter((friend) =>
-        friend.name.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredFriends = friends?.filter((friend) =>
+        friend.nom.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     const handleAddFriend = (friendName) => {
@@ -100,13 +140,13 @@ const FriendsTable = () => {
             />
             <table>
                 <tbody>
-                    {filteredFriends.map((friend) => (
+                    {filteredFriends?.map((friend) => (
                         <tr key={friend.id}>
                             <td className="small">
-                                <img className='friend-img' src={friend.image} alt={friend.name} />
+                                <img className='friend-img' src={friend.pdp} alt={friend.nom} />
                             </td>
                             <td className="small">
-                                {friend.name}
+                                {friend.nom}
                             </td>
                             <td className="small">
                                 {friend.connected ? (
@@ -119,7 +159,7 @@ const FriendsTable = () => {
                             <td className="small" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none' }}>
                                 <button
                                     className="add-friend"
-                                    onClick={() => handleAddFriend(friend.name)}
+                                    onClick={() => handleAddFriend(friend.nom)}
 
                                 >
                                     {<PersonRemoveIcon />}<span>Remove</span>
