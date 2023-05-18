@@ -7,19 +7,19 @@ export default function Rightbar({ profile }) {
     return (
       <>
         <div className="events-bar">
-          <div className="event">
+          <div className="event-card">
             <img className="event-img" src="assets/ofppt e.png" alt="event" />
             <span className="eventText">
               <b>Mercredi 26 avril 2023</b> Forum International de l'Etudiant - Casablanca
           </span>
           </div>
-          <div className="event">
+          <div className="event-card">
             <img className="event-img" src="assets/ofppt e.png" alt="event" />
             <span className="eventText">
               <b>Mercredi 26 avril 2023</b> Forum International de l'Etudiant - Casablanca
           </span>
           </div>
-          <div className="event">
+          <div className="event-card">
             <img className="event-img" src="assets/ofppt e.png" alt="event" />
             <span className="eventText">
               <b>Mercredi 26 avril 2023</b> Forum International de l'Etudiant - Casablanca

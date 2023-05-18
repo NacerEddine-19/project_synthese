@@ -7,7 +7,6 @@ export default function CoursesComponent() {
 
     const handleChange = (event) => {
         setSearchTerm(event.target.value);
-        console.log(event.target.value)
     };
 
     const handleSelect = (event) => {
@@ -33,28 +32,26 @@ export default function CoursesComponent() {
         <div className="container courses">
             <div className="coursesWraper">
                 <div className="row justify-content-center mt-4">
-                    <div className="col-lg-6 col-md-8 col-sm-10 justify-content-between">
-                        <div className="input-group mb-3">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Search by title"
-                                value={searchTerm}
-                                onChange={handleChange}
-                            />
-                            <div className="input-group-append">
-                                <select
-                                    className="form-select"
-                                    onChange={handleSelect}
-                                    value={selectedCategory}
-                                >
-                                    {categories.map((category, index) => (
-                                        <option key={index} value={category}>
-                                            {category}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+                    <div className="input-group mb-3">
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Search by title"
+                            value={searchTerm}
+                            onChange={handleChange}
+                        />
+                        <div className="input-group-append">
+                            <select
+                                className="form-select"
+                                onChange={handleSelect}
+                                value={selectedCategory}
+                            >
+                                {categories.map((category, index) => (
+                                    <option key={index} value={category}>
+                                        {category}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -65,7 +62,7 @@ export default function CoursesComponent() {
                                 <img
                                     src="assets/img1.jpg"
                                     className="card-img-top"
-                                    alt="not working"
+                                    alt={card.title}
                                 />
                                 <div className="card-body">
                                     <h5 className="card-title">{card.title}</h5>

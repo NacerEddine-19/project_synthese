@@ -66,7 +66,6 @@ export default function Topbar() {
           </div>
         </div>
         <MyDropdown item={<img src="/assets/person/1.jpeg" alt="" className="topbarImg" />} notif={userProfileNotif} />
-        {/* <Link to={`/Profile`}><img src="/assets/person/1.jpeg" alt="" className="topbarImg" /></Link> */}
         <ThemeSwitch />
       </div>
     </div>

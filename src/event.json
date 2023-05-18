@@ -1,0 +1,202 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "Azent Overseas Education Online Fair - USA",
+      "date": "25th Jun 2021",
+      "platform": "zoom meet",
+      "time": "02:00Pm",
+      "categorie": "usa",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 2,
+      "title": "Azent Overseas Education Online Fair - USA",
+      "date": "30th Jun 2021",
+      "platform": "zoom meet",
+      "time": "10:00Am",
+      "categorie": "usa",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 3,
+      "title": "Azent Overseas Education Online Fair - USA",
+      "date": "25th Jun 2021",
+      "platform": "zoom meet",
+      "time": "02:00Pm",
+      "categorie": "usa",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 4,
+      "title": "Azent Overseas Education Online Fair - USA",
+      "date": "30th Jun 2021",
+      "platform": "zoom meet",
+      "time": "10:00Am",
+      "categorie": "usa",
+      "img": "assets/events-img/image2.png"
+    },
+    {
+      "id": 5,
+      "title": "Azent Overseas Education Online Fair - USA",
+      "date": "25th Jun 2021",
+      "platform": "zoom meet",
+      "time": "02:00Pm",
+      "categorie": "usa",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 6,
+      "title": "Azent Overseas Education Online Fair - USA",
+      "date": "30th Jun 2021",
+      "platform": "zoom meet",
+      "time": "10:00Am",
+      "categorie": "usa",
+      "img": "assets/events-img/image2.png"
+    },
+    {
+      "id": 7,
+      "title": "Azent Overseas Education Online Fair - USA",
+      "date": "25th Jun 2021",
+      "platform": "zoom meet",
+      "time": "02:00Pm",
+      "categorie": "usa",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 8,
+      "title": "Azent Overseas Education Online Fair - USA",
+      "date": "30th Jun 2021",
+      "platform": "zoom meet",
+      "time": "10:00Am",
+      "categorie": "usa",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 1,
+      "title": "Azent Overseas Education Online Fair - UK",
+      "date": "25th Jun 2021",
+      "platform": "zoom meet",
+      "time": "02:00Pm",
+      "categorie": "UK",
+      "img": "assets/events-img/image2.png"
+    },
+    {
+      "id": 2,
+      "title": "Azent Overseas Education Online Fair - UK",
+      "date": "30th Jun 2021",
+      "platform": "zoom meet",
+      "time": "10:00Am",
+      "categorie": "UK",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 3,
+      "title": "Azent Overseas Education Online Fair - UK",
+      "date": "30th Jun 2021",
+      "platform": "zoom meet",
+      "time": "10:00Am",
+      "categorie": "UK",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 4,
+      "title": "Azent Overseas Education Online Fair - UK",
+      "date": "30th Jun 2021",
+      "platform": "zoom meet",
+      "time": "10:00Am",
+      "categorie": "UK",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 5,
+      "title": "Azent Overseas Education Online Fair - UK",
+      "date": "30th Jun 2021",
+      "platform": "zoom meet",
+      "time": "10:00Am",
+      "categorie": "UK",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 1,
+      "title": "Azent Overseas Education Online Fair - canada",
+      "date": "25th Jun 2021",
+      "platform": "zoom meet",
+      "time": "02:00Pm",
+      "categorie": "canada",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 2,
+      "title": "Azent Overseas Education Online Fair - canada",
+      "date": "30th Jun 2021",
+      "platform": "zoom meet",
+      "time": "10:00Am",
+      "categorie": "canada",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 3,
+      "title": "Azent Overseas Education Online Fair - canada",
+      "date": "25th Jun 2021",
+      "platform": "zoom meet",
+      "time": "02:00Pm",
+      "categorie": "canada",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 4,
+      "title": "Azent Overseas Education Online Fair - canada",
+      "date": "30th Jun 2021",
+      "platform": "zoom meet",
+      "time": "10:00Am",
+      "categorie": "canada",
+      "img": "assets/events-img/image2.png"
+    },
+    {
+      "id": 1,
+      "title": "Azent Overseas Education Online Fair - Australia",
+      "date": "25th Jun 2021",
+      "platform": "zoom meet",
+      "time": "02:00Pm",
+      "categorie": "australia",
+      "img": "assets/events-img/image2.png"
+    },
+    {
+      "id": 2,
+      "title": "Azent Overseas Education Online Fair - Australia",
+      "date": "30th Jun 2021",
+      "platform": "zoom meet",
+      "time": "10:00Am",
+      "categorie": "australia",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 3,
+      "title": "Azent Overseas Education Online Fair - Australia",
+      "date": "30th Jun 2021",
+      "platform": "zoom meet",
+      "time": "10:00Am",
+      "categorie": "australia",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 4,
+      "title": "Azent Overseas Education Online Fair - Australia",
+      "date": "30th Jun 2021",
+      "platform": "zoom meet",
+      "time": "10:00Am",
+      "categorie": "australia",
+      "img": "assets/events-img/image1.png"
+    },
+    {
+      "id": 4,
+      "title": "Azent Overseas Education Online Fair - Australia",
+      "date": "30th Jun 2021",
+      "platform": "zoom meet",
+      "time": "10:00Am",
+      "categorie": "australia",
+      "img": "assets/events-img/image1.png"
+    }
+  ]
+}

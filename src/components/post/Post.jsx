@@ -2,13 +2,16 @@ import "./post.css";
 import { MoreVert } from "@material-ui/icons";
 import { Users } from "../../dummyData";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function Post({ post }) {
-  const [like,setLike] = useState(post.like)
-  const [isLiked,setIsLiked] = useState(false)
+  const [like, setLike] = useState(post.like)
+  const [isLiked, setIsLiked] = useState(false)
+  const path = useLocation().pathname;
 
-  const likeHandler =()=>{
-    setLike(isLiked ? like-1 : like+1)
+
+  const likeHandler = () => {
+    setLike(isLiked ? like - 1 : like + 1)
     setIsLiked(!isLiked)
   }
   return (
@@ -32,7 +35,7 @@ export default function Post({ post }) {
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img className="postImg" src={post.photo} alt="" />
+          <img className="postImg" style={ { width: path === '/Profile' ? 400 : '100%' }} src={post.photo} alt={post.desc} />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">

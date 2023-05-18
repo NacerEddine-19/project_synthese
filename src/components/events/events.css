@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+.events-component{
+    flex: 9 1;
+}
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.events .btn {
+    display: inline-block;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    border-radius: 10px;
+    color: #00c853;
+    background-color: transparent;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: 1px solid #00c853;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.events .btn:hover {
+    color: #fff;
+    background: #00c853;
+}
+
+.flex {
+    position: relative;
+    width: 90%;
+    margin: 50px auto;
+    display: flex;
+}
+
+.events .btn:focus {
+    outline: none;
+}
+
+.events .btn:active {
+    transform: scale(0.98);
+}
+
+.events .btn-block {
+    display: block;
+    width: 100%;
+}
+
+
+/* events */
+.events {
+    background: #ffffff;
+    border-radius: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.event {
+    margin: 10px;
+    border: 1px solid #ebebeb;
+    border-radius: 20px;
+    max-width: 250px;
+}
+
+.event .img-container img {
+    width: 100%;
+    /* or any custom size */
+    height: 100%;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.event .img-container {
+    width: 100%;
+    height: 111px;
+}
+
+.event .information-container {
+    padding: 20px;
+}
+
+.event .information-container h2 {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: capitalize;
+    color: #000000;
+    margin: 8px;
+}
+
+.event .information-container h3 {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    margin-top: 15px;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    color: #f16621;
+}
+
+.event .information-container h5 {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 5px;
+    color: #000000;
+}

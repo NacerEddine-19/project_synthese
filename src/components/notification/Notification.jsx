@@ -1,10 +1,6 @@
 import './notif.css'
 import { Dropdown } from 'react-bootstrap';
-import { Link } from "react-router-dom";
-
-
-
-
+import { LinkContainer } from 'react-router-bootstrap';
 
 export default function MyDropdown({ item, notif }) {
     return (
@@ -14,20 +10,15 @@ export default function MyDropdown({ item, notif }) {
             </Dropdown.Toggle>
             <Dropdown.Menu>
                 {notif.map((item, index) => (
-                    <Dropdown.Item key={index}>
-                        {notif.length < 4 ?
-                            <>{item}</>
-                            :
-
-                            <> {item === 'Profile' ? <Link to={`/Profile`}>{item}</Link> : ''}
-                                {item === 'Settings' ? <Link to={`/Settings`}>{item}</Link> : ''}
-                                {item === 'Language' ? <Link to={`/Language`}>{item}</Link> : ''}
-                                {item === 'Log out' ? <Link to={`/Logout`}>{item}</Link> : ''}
-                            </>
+                    <LinkContainer
+                        key={index}
+                        to={
+                            item === 'Profile' ? '/Profile' : item === 'Settings' ? '/Settings' :
+                                item === 'Language' ? '/Language' : item === 'Log out' ? '/Logout' : ''
                         }
-
-
-                    </Dropdown.Item>
+                    >
+                        <Dropdown.Item>{item}</Dropdown.Item>
+                    </LinkContainer>
                 ))}
             </Dropdown.Menu>
         </Dropdown>

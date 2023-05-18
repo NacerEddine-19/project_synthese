@@ -8,6 +8,7 @@ import LogOut from './components/logOut/logOut';
 import MainDash from './pages/adminPages/mainPage/mainPage';
 import { UserRoutes, AdminRoutes } from './Routes/Routes';
 import PageNotFound from './pages/page not found/pageNotFound';
+import EventsPage from './pages/events/events';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/Profile" element={<Profile />} />
           <Route exact path="/Courses" element={<Courses />} />
           <Route exact path="/Projects" element={<Projects />} />
+          <Route exact path="/Events" element={<EventsPage />} />
           <Route exact path="/Logout" element={<LogOut />} />
         </Route>
         <Route element={<AdminRoutes />}>

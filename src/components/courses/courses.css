@@ -4,3 +4,11 @@
 .coursesWraper{
     padding: 10px;
 }
+.container{
+    max-width: 100% !important;
+    margin: 0 !important;
+}
+.input-group {
+    align-items: center;
+    padding: 15px;
+}
