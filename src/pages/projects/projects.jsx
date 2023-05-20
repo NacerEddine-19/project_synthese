@@ -1,8 +1,8 @@
-import CoursesComponent from "../../components/courses/courses";
+import ProjectComponent from "../../components/projectComponent/projectComponent";
 // import "./courses.css"
 
 export default function Projects() {
     return (
-        <CoursesComponent />
+        <ProjectComponent />
     );
 }

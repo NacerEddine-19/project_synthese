@@ -21,11 +21,11 @@ export default function Post({ post }) {
           <div className="postTopLeft">
             <img
               className="postProfileImg"
-              src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
+              src={Users.filter((u) => u.id === post?.user_id)[0].profilePicture}
               alt=""
             />
             <span className="postUsername">
-              {Users.filter((u) => u.id === post?.userId)[0].username}
+              {Users.filter((u) => u.id === post?.user_id)[0].username}
             </span>
             <span className="postDate">{post.date}</span>
           </div>
@@ -33,9 +33,9 @@ export default function Post({ post }) {
             <MoreVert />
           </div>
         </div>
-        <div className="postCenter">
-          <span className="postText">{post?.desc}</span>
-          <img className="postImg" style={ { width: path === '/Profile' ? 400 : '100%' }} src={post.photo} alt={post.desc} />
+        <div className="postCenter" style={{ display: path === '/Profile' ? 'flex' : 'block', flexDirection: 'column' }}>
+          <span className="postText">{post?.post_desc}</span>
+          <img className="postImg" style={{ width: path === '/Profile' ? 400 : '100%' }} src={`assets/post/${post.file}`} alt={post.desc} />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">

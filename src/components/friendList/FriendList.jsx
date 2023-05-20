@@ -3,7 +3,7 @@ import './freindstable.css';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import request from '../../utils/request';
 import { useEffect } from 'react';
-import getUser from '../../utils/helper';
+import {getUser} from '../../utils/helper';
 import LoadingIcon from '../loadingIcon/loadingIcon';
 
 const FriendsTable = () => {

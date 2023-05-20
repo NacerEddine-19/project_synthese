@@ -9,6 +9,7 @@ import MainDash from './pages/adminPages/mainPage/mainPage';
 import { UserRoutes, AdminRoutes } from './Routes/Routes';
 import PageNotFound from './pages/page not found/pageNotFound';
 import EventsPage from './pages/events/events';
+import Test from './pages/testing/test';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route element={<AdminRoutes />}>
           <Route exact path="/adminDash" element={<MainDash />} />
         </Route>
+        <Route exact path="/test" element={<Test />} />
         <Route path='*' element={<PageNotFound />}></Route>
       </Routes>
     </Router>
