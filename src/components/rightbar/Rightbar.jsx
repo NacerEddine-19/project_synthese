@@ -1,8 +1,11 @@
 import "./rightbar.css";
 import { Users } from "../../dummyData";
 import Online from "../online/Online";
+import { getUser } from "../../utils/helper";
+import { useState } from "react";
 
 export default function Rightbar({ profile }) {
+  const [user] = useState(getUser());
   const HomeRightbar = () => {
     return (
       <>
@@ -43,15 +46,11 @@ export default function Rightbar({ profile }) {
         <div className="rightbarInfo">
           <div className="rightbarInfoItem">
             <span className="rightbarInfoKey">City:</span>
-            <span className="rightbarInfoValue">New York</span>
+            <span className="rightbarInfoValue">{`${user?.city}`}</span>
           </div>
           <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">From:</span>
-            <span className="rightbarInfoValue">Madrid</span>
-          </div>
-          <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">Relationship:</span>
-            <span className="rightbarInfoValue">Single</span>
+            <span className="rightbarInfoKey">School:</span>
+            <span className="rightbarInfoValue">{`${user?.school}`}</span>
           </div>
         </div>
         <h4 className="rightbarTitle">User friends</h4>

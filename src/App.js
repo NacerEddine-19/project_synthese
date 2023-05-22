@@ -10,6 +10,7 @@ import { UserRoutes, AdminRoutes } from './Routes/Routes';
 import PageNotFound from './pages/page not found/pageNotFound';
 import EventsPage from './pages/events/events';
 import Test from './pages/testing/test';
+import ViewPostPage from './pages/postPage/postPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/Projects" element={<Projects />} />
           <Route exact path="/Events" element={<EventsPage />} />
           <Route exact path="/Logout" element={<LogOut />} />
+          <Route exact path="/posts/:postId" element={<ViewPostPage />} />
         </Route>
         <Route element={<AdminRoutes />}>
           <Route exact path="/adminDash" element={<MainDash />} />

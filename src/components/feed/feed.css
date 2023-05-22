@@ -1,7 +1,24 @@
 .feed {
-    flex: 9;
+    flex : 8;
 }
 
 .feedWrapper {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.link-wrapper {
+    color: unset;
+    text-decoration: unset;
+    width: 100%;
+
+}
+
+.link-wrapper:hover {
+    text-decoration: unset;
+    color: unset;
+    cursor: unset;
 }

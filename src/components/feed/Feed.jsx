@@ -3,23 +3,24 @@ import Share from "../share/Share";
 import "./feed.css";
 import { Posts } from "../../dummyData";
 import { useState } from "react";
-import {getUser} from "../../utils/helper";
+import { getUser } from "../../utils/helper";
 import { useEffect } from "react";
 import request from "../../utils/request";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import LoadingIcon from '../loadingIcon/loadingIcon';
 
 export default function Feed() {
-  const SERVER = process.env.REACT_APP_SERVER_API;
+  const API = process.env.REACT_APP_SERVER_API;
   const [posts, setPosts] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [user] = useState(getUser());
   const path = useLocation().pathname.slice(1);
 
-  useEffect(() => {
+  const fetchPosts = () => {
     if (path === '') {
       try {
-        request.get(`${SERVER}/posts`).then(
+        request.get(`${API}/posts`).then(
           (res) => {
             setPosts(res.data);
             setLoading(false);
@@ -37,7 +38,7 @@ export default function Feed() {
     } else if (path === 'Profile') {
       try {
         console.log(user?.id);
-        request.get(`${SERVER}/posts/user/${user?.id}`).then(
+        request.get(`${API}/posts/user/${user?.id}`).then(
           (res) => {
             console.log(res)
             setPosts(res.data);
@@ -53,20 +54,32 @@ export default function Feed() {
         setLoading(false);
       }
     }
+  }
+  useEffect(() => {
+    fetchPosts();
 
     return () => {
       setPosts();
       setError();
       setLoading();
     };
-  }, [path, user, SERVER]);
+  }, [path, user, API]);
+
+  const handlePostAdded = (newPost) => {
+    // Update the posts array with the new post
+    setPosts((prevPosts) => [newPost, ...prevPosts]);
+  };
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share />
-        {posts?.map((p) => (
-          <Post key={p.id_post} post={p} />
-        ))}
+        <Share onPostAdded={handlePostAdded} />
+        {loading ?
+          <LoadingIcon /> :
+          <>{posts?.map((p) => (
+            <Link key={p.id_post} to={`/posts/${p.id_post}`} className="link-wrapper">
+              <Post post={p} />
+            </Link>
+          ))}</>}
       </div>
     </div>
   );

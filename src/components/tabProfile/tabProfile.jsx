@@ -9,7 +9,7 @@ export default function TabProfile({ content, activeTab, handleTabClick }) {
                 <ul className="nav nav-tabs">
                     <li className={activeTab === 'feed' ? 'active' : ''}>
                         <a href="#feed" data-toggle="feed" onClick={() => handleTabClick('feed')}>
-                            Feed
+                            My Feed
                         </a>
                     </li>
                     <li className={activeTab === 'friends' ? 'active' : ''}>

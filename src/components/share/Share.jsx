@@ -5,15 +5,22 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { getUser } from '../../utils/helper';
 import request from '../../utils/request';
 
-export default function Share() {
-  const SERVER = process.env.REACT_APP_SERVER_API;
+export default function Share({ onPostAdded }) {
+  const API = process.env.REACT_APP_SERVER_API;
   const [file, setFile] = useState();
   const [desc, setDesc] = useState("");
   const [user_id] = useState(getUser()?.id);
   const filePickerRef = useRef(null);
 
+  const resetForm = () => {
+    setFile(null);
+    setDesc("");
+
+  }
+
   const handleFilePickerClick = () => {
     filePickerRef.current.click();
+
   };
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -23,7 +30,7 @@ export default function Share() {
     }
   };
   const handleDescChange = (e) => {
-    setDesc(e.target.value);
+    setDesc(e.target.value)
   };
 
   const handleCloseImage = (e) => {
@@ -31,23 +38,24 @@ export default function Share() {
   }
 
   const handleUploadClick = () => {
-    if (!file || !desc || !user_id) {
+    if (!desc || !user_id) {
       return;
     }
     request
-      .post(`${SERVER}/posts`, {
+      .post(`${API}/posts`, {
 
-        file: file,
+        file: file ? file : null,
         post_desc: desc,
         user_id: user_id,
 
       })
       .then((response) => {
         console.log(response.data);
+        onPostAdded(response.data);
       })
       .catch((error) => {
         console.error(error);
-      });
+      }).finally(resetForm());
   };
 
   return (

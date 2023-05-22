@@ -7,10 +7,12 @@ import FriendsTable from "../../components/friendList/FriendList";
 import Courses from "../../components/courses/courses";
 // import Projects from "../projects/projects";
 import { useLocation } from "react-router-dom";
+import { getUser } from "../../utils/helper";
 
 export default function Profile() {
   const locat = useLocation().hash.slice(1);
   const [activeTab, setActiveTab] = useState(locat ? locat : 'feed');
+  const [user] = useState(getUser());
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -24,18 +26,18 @@ export default function Profile() {
             <div className="profileCover">
               <img
                 className="profileCoverImg"
-                src="assets/post/3.jpeg"
+                src={`${user?.pdc}`}
                 alt=""
               />
               <img
                 className="profileUserImg"
-                src="assets/person/7.jpeg"
+                src={`${user?.pdp}`}
                 alt=""
               />
             </div>
             <div className="profileInfo">
-              <h4 className="profileInfoName">Safak Kocaoglu</h4>
-              <span className="profileInfoDesc">Hello my friends!</span>
+              <h4 className="profileInfoName">{`${user?.nom}`} {`${user?.prenom}`}</h4>
+              <span className="profileInfoDesc">{`${user?.bio}`}</span>
             </div>
           </div>
           <div className="profileRightBottom">

@@ -1,6 +1,6 @@
 .p30 {
     padding: 30px !important;
-    width: 650px !important;
+    min-width: 456px !important;
 }
 
 .tab-block {
@@ -69,4 +69,14 @@
     position: relative;
     z-index: 12;
     background: #FFF;
+}
+
+.col-md-8{
+    width: 60% !important;
+}
+
+.nav{
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
 }

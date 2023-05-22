@@ -11,6 +11,8 @@ import {
 } from "@material-ui/icons";
 import SourceRoundedIcon from '@mui/icons-material/SourceRounded';
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { getUser } from "../../utils/helper";
 
 const notification = [
   'Action',
@@ -26,6 +28,7 @@ const userProfileNotif = [
 ];
 
 export default function Topbar() {
+  const [user] = useState(getUser());
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -65,7 +68,7 @@ export default function Topbar() {
             <span className="topbarIconBadge">{notification.length}</span>
           </div>
         </div>
-        <MyDropdown item={<img src="/assets/person/1.jpeg" alt="" className="topbarImg" />} notif={userProfileNotif} />
+        <MyDropdown item={<img src={`${user?.pdp}`} alt={`${user.nom}`} className="topbarImg" />} notif={userProfileNotif} />
         <ThemeSwitch />
       </div>
     </div>

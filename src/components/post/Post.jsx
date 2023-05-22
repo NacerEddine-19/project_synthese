@@ -3,13 +3,24 @@ import { MoreVert } from "@material-ui/icons";
 import { Users } from "../../dummyData";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Post({ post }) {
   const [like, setLike] = useState(post.like)
   const [isLiked, setIsLiked] = useState(false)
+  const [assetsPath, setAssetsPath] = useState('assets/');
   const path = useLocation().pathname;
 
-
+  useEffect(() => {
+    if (path === `/posts/${post.id_post}`) {
+      setAssetsPath('../assets/')
+    } else {
+      setAssetsPath('assets/')
+    }
+    return () => {
+      setAssetsPath()
+    };
+  }, [path]);
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1)
     setIsLiked(!isLiked)
@@ -21,7 +32,7 @@ export default function Post({ post }) {
           <div className="postTopLeft">
             <img
               className="postProfileImg"
-              src={Users.filter((u) => u.id === post?.user_id)[0].profilePicture}
+              src={`${Users.filter((u) => u.id === post?.user_id)[0].profilePicture}`}
               alt=""
             />
             <span className="postUsername">
@@ -35,12 +46,12 @@ export default function Post({ post }) {
         </div>
         <div className="postCenter" style={{ display: path === '/Profile' ? 'flex' : 'block', flexDirection: 'column' }}>
           <span className="postText">{post?.post_desc}</span>
-          <img className="postImg" style={{ width: path === '/Profile' ? 400 : '100%' }} src={`assets/post/${post.file}`} alt={post.desc} />
+          {post.file && (<img className="postImg" src={`${assetsPath}post/${post.file}`} alt={post.desc} />)}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <img className="likeIcon" src="assets/like.png" onClick={likeHandler} alt="" />
-            <img className="likeIcon" src="assets/heart.png" onClick={likeHandler} alt="" />
+            <img className="likeIcon" src={`${assetsPath}like.png`} onClick={likeHandler} alt="" />
+            <img className="likeIcon" src={`${assetsPath}heart.png`} onClick={likeHandler} alt="" />
             <span className="postLikeCounter">{like} people like it</span>
           </div>
           <div className="postBottomRight">
