@@ -1,30 +1,35 @@
 import "./post.css";
 import { MoreVert } from "@material-ui/icons";
-import { Users } from "../../dummyData";
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import MyDropdown from "../notification/Notification";
 
-export default function Post({ post }) {
-  const [like, setLike] = useState(post.like)
-  const [isLiked, setIsLiked] = useState(false)
+export default function Post({ post, userP, num }) {
+  const [user] = useState(post.user);
+  const [like, setLike] = useState(post.like);
+  const [isLiked, setIsLiked] = useState(false);
   const [assetsPath, setAssetsPath] = useState('assets/');
   const path = useLocation().pathname;
 
+  const postOptions = [
+    'remove',
+    'edit',
+    'delete',
+    'report'
+  ];
+
   useEffect(() => {
-    if (path === `/posts/${post.id_post}`) {
-      setAssetsPath('../assets/')
-    } else {
-      setAssetsPath('assets/')
-    }
+    setAssetsPath(path === `/posts/${post.id_post}` ? '../assets/' : 'assets/');
     return () => {
-      setAssetsPath()
+      setAssetsPath('');
     };
-  }, [path]);
+  }, [path, post.id_post]);
+
   const likeHandler = () => {
-    setLike(isLiked ? like - 1 : like + 1)
-    setIsLiked(!isLiked)
-  }
+    setLike(isLiked ? like - 1 : like + 1);
+    setIsLiked(!isLiked);
+  };
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -32,22 +37,24 @@ export default function Post({ post }) {
           <div className="postTopLeft">
             <img
               className="postProfileImg"
-              src={`${Users.filter((u) => u.id === post?.user_id)[0].profilePicture}`}
+              src={userP ? userP.pdp : user.pdp}
               alt=""
             />
             <span className="postUsername">
-              {Users.filter((u) => u.id === post?.user_id)[0].username}
+              {userP ? userP.nom : user.nom}
             </span>
             <span className="postDate">{post.date}</span>
           </div>
           <div className="postTopRight">
-            <MoreVert />
+            <MyDropdown item={<MoreVert />} notif={postOptions} post={true} user={user} />
           </div>
         </div>
-        <div className="postCenter" style={{ display: path === '/Profile' ? 'flex' : 'block', flexDirection: 'column' }}>
-          <span className="postText">{post?.post_desc}</span>
-          {post.file && (<img className="postImg" src={`${assetsPath}post/${post.file}`} alt={post.desc} />)}
-        </div>
+        <Link to={`/posts/${post.id_post}`} className="link-wrapper">
+          <div className="postCenter" style={{ display: path === '/Profile' ? 'flex' : 'block', flexDirection: 'column' }}>
+            <span className="postText">{post?.post_desc}</span>
+            {post.file && <img className="postImg" src={`${assetsPath}post/${post.file}`} alt={post.desc} />}
+          </div>
+        </Link>
         <div className="postBottom">
           <div className="postBottomLeft">
             <img className="likeIcon" src={`${assetsPath}like.png`} onClick={likeHandler} alt="" />
@@ -55,7 +62,7 @@ export default function Post({ post }) {
             <span className="postLikeCounter">{like} people like it</span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText">{post.comment} comments</span>
+            <span className="postCommentText"><h6 style={{ display: "inline" }}>{num}</h6> comments</span>
           </div>
         </div>
       </div>

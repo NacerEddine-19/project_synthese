@@ -1,3 +1,37 @@
-.post-page{
+.post-page {
     flex: 8;
+}
+
+.post-input {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.post-input textarea {
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 16px;
+    resize: none;
+}
+
+.comment {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 16px;
+    resize: none;
+}
+.comment ul{
+    padding: unset !important;
+    padding-inline-start: 10px !important;
+    padding-left: 0 !important;
+}
+.comment-info h5{
+    margin: 0;
 }

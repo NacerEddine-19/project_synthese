@@ -3,30 +3,41 @@ import { Users } from "../../dummyData";
 import Online from "../online/Online";
 import { getUser } from "../../utils/helper";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Rightbar({ profile }) {
   const [user] = useState(getUser());
+  const path = useLocation().pathname;
+
+  const [assetsPath, setAssetsPath] = useState('');
+  useEffect(() => {
+    setAssetsPath(path.includes(`posts`) ? '../' : '');
+    return () => {
+      setAssetsPath('');
+    };
+  }, [path]);
   const HomeRightbar = () => {
     return (
       <>
         <div className="events-bar">
           <div className="event-card">
-            <img className="event-img" src="assets/ofppt e.png" alt="event" />
+            <img className="event-img" src={`${assetsPath}assets/ofppt e.png`} alt="event" />
             <span className="eventText">
               <b>Mercredi 26 avril 2023</b> Forum International de l'Etudiant - Casablanca
-          </span>
+            </span>
           </div>
           <div className="event-card">
-            <img className="event-img" src="assets/ofppt e.png" alt="event" />
+            <img className="event-img" src={`${assetsPath}assets/ofppt e.png`} alt="event" />
             <span className="eventText">
               <b>Mercredi 26 avril 2023</b> Forum International de l'Etudiant - Casablanca
-          </span>
+            </span>
           </div>
           <div className="event-card">
-            <img className="event-img" src="assets/ofppt e.png" alt="event" />
+            <img className="event-img" src={`${assetsPath}assets/ofppt e.png`} alt="event" />
             <span className="eventText">
               <b>Mercredi 26 avril 2023</b> Forum International de l'Etudiant - Casablanca
-          </span>
+            </span>
           </div>
         </div>
         <h4 className="rightbarTitle">Online Friends</h4>

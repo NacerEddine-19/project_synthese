@@ -43,7 +43,7 @@ export default function Profile() {
           <div className="profileRightBottom">
             <TabProfile content={
               <>
-                {activeTab === 'feed' && <Feed />}
+                {activeTab === 'feed' && <Feed userP={user} />}
                 {activeTab === 'friends' && <FriendsTable />}
                 {activeTab === 'courses' && <Courses />}
                 {/* {activeTab === 'projects' && <Projects />} */}

@@ -7,3 +7,9 @@
     --bs-primary: #3a3b3c;
     --bs-light: #242526;
 }
+
+a {
+    color: unset;
+    background-color: unset;
+    text-decoration: unset;
+}

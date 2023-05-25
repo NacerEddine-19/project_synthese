@@ -9,7 +9,7 @@ export default function Share({ onPostAdded }) {
   const API = process.env.REACT_APP_SERVER_API;
   const [file, setFile] = useState();
   const [desc, setDesc] = useState("");
-  const [user_id] = useState(getUser()?.id);
+  const [user] = useState(getUser());
   const filePickerRef = useRef(null);
 
   const resetForm = () => {
@@ -38,7 +38,7 @@ export default function Share({ onPostAdded }) {
   }
 
   const handleUploadClick = () => {
-    if (!desc || !user_id) {
+    if (!desc || !user.id) {
       return;
     }
     request
@@ -46,11 +46,10 @@ export default function Share({ onPostAdded }) {
 
         file: file ? file : null,
         post_desc: desc,
-        user_id: user_id,
+        user_id: user.id,
 
       })
       .then((response) => {
-        console.log(response.data);
         onPostAdded(response.data);
       })
       .catch((error) => {
@@ -63,7 +62,7 @@ export default function Share({ onPostAdded }) {
       <div className="shareWrapper">
         <div className="shareTop">
           <div>
-            <img className="shareProfileImg" src="/assets/person/1.jpeg" alt="" />
+            <img className="shareProfileImg" src={user.pdp} alt="" />
             <input
               placeholder="What's in your mind Safak?"
               onChange={handleDescChange}
