@@ -3,27 +3,27 @@ import { MoreVert } from "@material-ui/icons";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import MyDropdown from "../notification/Notification";
+import { getUser } from "../../utils/helper";
 
-export default function Post({ post, userP, num }) {
+export default function Post({ post, userP, num, onPostDeleted }) {
+  const [connectedUser] = useState(getUser());
   const [user] = useState(post.user);
   const [like, setLike] = useState(post.like);
   const [isLiked, setIsLiked] = useState(false);
   const [assetsPath, setAssetsPath] = useState('assets/');
   const path = useLocation().pathname;
-
   const postOptions = [
-    'remove',
     'edit',
     'delete',
     'report'
   ];
 
   useEffect(() => {
-    setAssetsPath(path === `/posts/${post.id_post}` ? '../assets/' : 'assets/');
+    setAssetsPath(path === `/posts/${post?.id_post}` ? '../assets/' : 'assets/');
     return () => {
       setAssetsPath('');
     };
-  }, [path, post.id_post]);
+  }, [path, post?.id_post]);
 
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1);
@@ -37,22 +37,22 @@ export default function Post({ post, userP, num }) {
           <div className="postTopLeft">
             <img
               className="postProfileImg"
-              src={userP ? userP.pdp : user.pdp}
+              src={userP ? userP?.pdp : user?.pdp}
               alt=""
             />
             <span className="postUsername">
-              {userP ? userP.nom : user.nom}
+              {userP ? userP.nom : user?.nom}
             </span>
-            <span className="postDate">{post.date}</span>
+            <span className="postDate">{post?.date}</span>
           </div>
           <div className="postTopRight">
-            <MyDropdown item={<MoreVert />} notif={postOptions} post={true} user={user} />
+            <MyDropdown icon={<MoreVert />} onPostDeleted={onPostDeleted} notif={postOptions} post={post} user={user} connectedUser={connectedUser} />
           </div>
         </div>
-        <Link to={`/posts/${post.id_post}`} className="link-wrapper">
+        <Link to={`/posts/${post?.id_post}`} className="link-wrapper">
           <div className="postCenter" style={{ display: path === '/Profile' ? 'flex' : 'block', flexDirection: 'column' }}>
             <span className="postText">{post?.post_desc}</span>
-            {post.file && <img className="postImg" src={`${assetsPath}post/${post.file}`} alt={post.desc} />}
+            {post.file && <img className="postImg" src={`${assetsPath}post/${post?.file}`} alt={post?.desc} />}
           </div>
         </Link>
         <div className="postBottom">

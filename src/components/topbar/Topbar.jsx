@@ -56,19 +56,19 @@ export default function Topbar() {
       <div className="topbarRight">
         <div className="topbarIcons">
           <div className="topbarIconItem">
-            <MyDropdown item={<Person />} notif={notification} />
+            <MyDropdown icon={<Person />} notif={notification} />
             <span className="topbarIconBadge">{notification.length}</span>
           </div>
           <div className="topbarIconItem">
-            <MyDropdown item={<Chat />} notif={notification} />
+            <MyDropdown icon={<Chat />} notif={notification} />
             <span className="topbarIconBadge">{notification.length}</span>
           </div>
           <div className="topbarIconItem">
-            <MyDropdown item={<Notifications />} notif={notification} />
+            <MyDropdown icon={<Notifications />} notif={notification} />
             <span className="topbarIconBadge">{notification.length}</span>
           </div>
         </div>
-        <MyDropdown item={<img src={`${user?.pdp}`} alt={`${user.nom}`} className="topbarImg" />} notif={userProfileNotif} />
+        <MyDropdown icon={<img src={`${user?.pdp}`} alt={`${user.nom}`} className="topbarImg" />} notif={userProfileNotif} />
         <ThemeSwitch />
       </div>
     </div>

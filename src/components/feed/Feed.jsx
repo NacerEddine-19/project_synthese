@@ -39,6 +39,10 @@ export default function Feed({ userP }) {
     setPosts((prevPosts) => [newPost, ...prevPosts]);
   };
 
+  const handlePostDeleted = (postId) => {
+    setPosts((prevPosts) => prevPosts.filter((post) => post.id_post !== postId));
+  };
+
   return (
     <div className="feed">
       <div className="feedWrapper">
@@ -49,9 +53,10 @@ export default function Feed({ userP }) {
           posts?.map((p) => (
             <Post
               key={p.id_post}
-              num={p.comments.length}
+              num={p?.comments?.length}
               userP={userP}
               post={p}
+              onPostDeleted={handlePostDeleted}
             />
           ))
         )}
