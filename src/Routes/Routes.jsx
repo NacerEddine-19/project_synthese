@@ -32,6 +32,6 @@ export const AdminRoutes = () => {
             Navigate("/login");
         }
     }, [Navigate, isAuthenticated]);
-    const isSuperAdmin = userRole === "superAdmin";
+    const isSuperAdmin = userRole === "super_admin";
     return isSuperAdmin ? <Outlet /> : <Login />;
 };

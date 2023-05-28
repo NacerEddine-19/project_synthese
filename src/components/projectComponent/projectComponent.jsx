@@ -70,14 +70,52 @@ export default function ProjectComponent() {
     return (
         <div className="project-component">
             <div className="header">
-                <h1>Projects</h1>
-                <div className="searchbar">
-                    <input
-                        type="text"
-                        placeholder="Search projects"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
+                <div className="upper-head">
+                    <h1>Projects</h1>
+                    <div className="searchbar">
+                        <input
+                            type="text"
+                            placeholder="Search projects"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                    </div>
+                </div>
+                <div className="add-project">
+                    {!showAddForm ? (
+                        <button className="btn btn-primary" onClick={() => setShowAddForm(true)}>Add Project</button>
+                    ) : (
+                        <div className="add-project-form">
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Project Name"
+                                value={newProject.name}
+                                onChange={handleInputChange}
+                            />
+                            <input
+                                type="text"
+                                name="team"
+                                placeholder="Project Team"
+                                value={newProject.team}
+                                onChange={handleInputChange}
+                            />
+                            <input
+                                type="file"
+                                name="file"
+                                onChange={handleFileUpload}
+                            />
+                            <input
+                                type="text"
+                                name="language"
+                                placeholder="Project Language"
+                                value={newProject.language}
+                                onChange={handleInputChange}
+                            />
+                            <button className="btn btn-success" onClick={handleAddProject}>Save Project</button>
+                            <button className="btn btn-secondary" onClick={() => setShowAddForm(false)}>Cancel</button>
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -85,10 +123,19 @@ export default function ProjectComponent() {
                 {filteredProjects.map((project, index) => (
                     <div className="project card" key={index}>
                         <div className="card-body">
-                            <h2 className="card-title">{project.name}</h2>
-                            <p className="card-text">Team: {project.team}</p>
-                            <p className
-                                ="card-text">Language: {project.language}</p>
+                            <div className="card-info">
+                                <div className="card-info-left">
+                                    <h2 className="card-title">{project.name}</h2>
+                                    <p className="card-text">Team: {project.team}</p>
+                                    <p className
+                                        ="card-text">Language: {project.language}</p>
+                                </div>
+                                <div className="card-info-right">
+                                <button className="btn btn-primary" onClick={() => handleLike(index)}>
+                                    <FaThumbsUp className="like-icon" />
+                                </button>
+                                </div>
+                            </div>
                             <div className="card-footer">
                                 <button className="btn btn-primary" onClick={() => handleLike(index)}>
                                     <FaThumbsUp className="like-icon" />
@@ -102,43 +149,6 @@ export default function ProjectComponent() {
                         </div>
                     </div>
                 ))}
-            </div>
-
-            <div className="add-project">
-                {!showAddForm ? (
-                    <button className="btn btn-primary" onClick={() => setShowAddForm(true)}>Add Project</button>
-                ) : (
-                    <div className="add-project-form">
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder="Project Name"
-                            value={newProject.name}
-                            onChange={handleInputChange}
-                        />
-                        <input
-                            type="text"
-                            name="team"
-                            placeholder="Project Team"
-                            value={newProject.team}
-                            onChange={handleInputChange}
-                        />
-                        <input
-                            type="file"
-                            name="file"
-                            onChange={handleFileUpload}
-                        />
-                        <input
-                            type="text"
-                            name="language"
-                            placeholder="Project Language"
-                            value={newProject.language}
-                            onChange={handleInputChange}
-                        />
-                        <button className="btn btn-success" onClick={handleAddProject}>Save Project</button>
-                        <button className="btn btn-secondary" onClick={() => setShowAddForm(false)}>Cancel</button>
-                    </div>
-                )}
             </div>
         </div>
     );

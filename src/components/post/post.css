@@ -40,7 +40,7 @@
 
 .postCenter {
   margin: 20px 0;
-  
+
 }
 
 .postImg {
@@ -78,4 +78,10 @@
   cursor: pointer;
   border-bottom: 1px dashed gray;
   font-size: 15px;
+}
+
+a.dropdown-item.disabled {
+  color: white !important;
+  background-color: red !important;
+  cursor: not-allowed !important  ;
 }

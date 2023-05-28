@@ -9,7 +9,7 @@ export default function Login() {
 
   const SERVER_API = process.env.REACT_APP_SERVER_API;
 
-  const [email, setEmail] = useState("majid.nacereddine@ofppt-edu.ma"); //const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const [email, setEmail] = useState("admin@admin.com"); // majid.nacereddine@ofppt-edu.ma  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const [password, setPassword] = useState("123");
   const [user, setUser] = useState();
 
@@ -28,13 +28,15 @@ export default function Login() {
       try {
         navigate("/");
       } catch (ex) {
-        window.location.reload(true)
+        console.log(ex);
+        // window.location.reload(true)
       }
-    } else if (localStorage.getItem('role') === "superAdmin" && user) {
+    } else if (localStorage.getItem('role') === "super_admin" && user) {
       try {
         navigate("/adminDash");
       } catch (ex) {
-        window.location.reload(true)
+        console.log(ex);
+        // window.location.reload(true)
       }
     }
     return () => {

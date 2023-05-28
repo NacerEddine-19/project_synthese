@@ -3,7 +3,7 @@ import { Dropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import request from '../../utils/request';
 
-export default function MyDropdown({ icon, notif, post, user, connectedUser, onPostDeleted }) {
+export default function MyDropdown({ icon, notif, post, user, connectedUser, onPostDeleted, isReported }) {
     const API = process.env.REACT_APP_SERVER_API;
     const isPost = post;
 
@@ -82,8 +82,17 @@ export default function MyDropdown({ icon, notif, post, user, connectedUser, onP
                     );
                 } else if (content === 'report' && user?.id !== connectedUser?.id) {
                     return (
-                        //to={connectedUser?.role === 'admin' ? `/adminreportPost` : `/reportPost`}
-                        <Dropdown.Item key={index} onClick={() => handleCommand(content)}>{content}</Dropdown.Item>
+                        <Dropdown.Item
+                            key={index}
+                            onClick={() => {
+                                if (isReported) {
+                                    return null;
+                                } else {
+                                    handleCommand(content)
+                                }
+                            }}
+                            className={isReported ? 'disabled' : ''}
+                        >{content}</Dropdown.Item>
                     );
                 }
                 return null;
