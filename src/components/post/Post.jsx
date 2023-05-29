@@ -59,7 +59,7 @@ export default function Post({ post, userP, num, onPostDeleted }) {
               alt=""
             />
             <span className="postUsername">
-              {userP ? userP.nom : user?.nom}
+              {userP ? userP.nom : user?.nom} {userP ? userP?.nom : user?.prenom}
             </span>
             <span className="postDate">{post?.date}</span>
           </div>
@@ -78,7 +78,7 @@ export default function Post({ post, userP, num, onPostDeleted }) {
             {isLiked ? (
               <Favorite style={{ color: 'red' }} className="likeIcon" onClick={likeHandler} />
             ) : (
-              <FavoriteBorderRounded  className="likeIcon" onClick={likeHandler} />
+              <FavoriteBorderRounded className="likeIcon" onClick={likeHandler} />
             )}
             <span className="postLikeCounter">
               {like === 0

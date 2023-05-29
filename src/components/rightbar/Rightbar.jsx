@@ -5,40 +5,31 @@ import { getUser } from "../../utils/helper";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import events from "../../event.json";
 
 export default function Rightbar({ profile }) {
   const [user] = useState(getUser());
   const path = useLocation().pathname;
-
-  const [assetsPath, setAssetsPath] = useState('');
-  useEffect(() => {
-    setAssetsPath(path.includes(`posts`) ? '../' : '');
-    return () => {
-      setAssetsPath('');
-    };
-  }, [path]);
+  const [friends, setFriends] = useState()
   const HomeRightbar = () => {
     return (
       <>
         <div className="events-bar">
-          <div className="event-card">
-            <img className="event-img" src={`${assetsPath}assets/ofppt e.png`} alt="event" />
-            <span className="eventText">
-              <b>Mercredi 26 avril 2023</b> Forum International de l'Etudiant - Casablanca
-            </span>
-          </div>
-          <div className="event-card">
-            <img className="event-img" src={`${assetsPath}assets/ofppt e.png`} alt="event" />
-            <span className="eventText">
-              <b>Mercredi 26 avril 2023</b> Forum International de l'Etudiant - Casablanca
-            </span>
-          </div>
-          <div className="event-card">
-            <img className="event-img" src={`${assetsPath}assets/ofppt e.png`} alt="event" />
-            <span className="eventText">
-              <b>Mercredi 26 avril 2023</b> Forum International de l'Etudiant - Casablanca
-            </span>
-          </div>
+
+          {events.events.map((event, index) => {
+            if (event.categorie = 'Marrakech') {
+              if (index < 3) {
+                return (
+                  <div key={index} className="event-card">
+                    <img className="event-img" src={event.img} alt="event" />
+                    <span className="eventText">
+                      <b>{event.date}</b> {event.title}
+                    </span>
+                  </div>
+                )
+              }
+            }
+          })}
         </div>
         <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendList">

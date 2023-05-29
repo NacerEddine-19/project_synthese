@@ -73,6 +73,10 @@
     margin-top: 10px;
 }
 
+.download-icon {
+    color: white;
+}
+
 .card-footer button {
     padding: 10px;
     color: #ffffff;
@@ -80,6 +84,18 @@
     border-radius: 6px;
     margin-right: 10px;
     cursor: pointer;
+}
+.card-text{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem !important;
+}
+.card-info-left span {
+    padding: 8px;
+    border-radius: 15px;
+    background-color: var(--bs-card-cap-bg);
 }
 
 .project-component input[type='text'],
