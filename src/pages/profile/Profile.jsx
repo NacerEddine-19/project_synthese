@@ -8,6 +8,7 @@ import Courses from "../../components/courses/courses";
 // import Projects from "../projects/projects";
 import { useLocation } from "react-router-dom";
 import { getUser } from "../../utils/helper";
+import Projects from "../projects/projects";
 
 export default function Profile() {
   const locat = useLocation().hash.slice(1);
@@ -46,7 +47,7 @@ export default function Profile() {
                 {activeTab === 'feed' && <Feed userP={user} />}
                 {activeTab === 'friends' && <FriendsTable />}
                 {activeTab === 'courses' && <Courses />}
-                {/* {activeTab === 'projects' && <Projects />} */}
+                {activeTab === 'projects' && <Projects />}
                 {/* {activeTab === 'favorites' && <Favorites />} */}
               </>
             }

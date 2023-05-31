@@ -8,8 +8,8 @@ import request from "../../utils/request";
 
 export default function Post({ post, userP, num, onPostDeleted }) {
   const [connectedUser] = useState(getUser());
-  const [user] = useState(post.user);
-  const [like, setLike] = useState(post.likes);
+  const [user] = useState(post?.user);
+  const [like, setLike] = useState(post?.likes);
   const [isLiked, setIsLiked] = useState(false);
   const [assetsPath, setAssetsPath] = useState('assets/');
   const path = useLocation().pathname;
@@ -55,7 +55,7 @@ export default function Post({ post, userP, num, onPostDeleted }) {
           <div className="postTopLeft">
             <img
               className="postProfileImg"
-              src={userP ? userP?.pdp : user.pdp}
+              src={userP ? userP?.pdp : user?.pdp}
               alt=""
             />
             <span className="postUsername">

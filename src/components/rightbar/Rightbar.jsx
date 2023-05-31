@@ -3,14 +3,10 @@ import { Users } from "../../dummyData";
 import Online from "../online/Online";
 import { getUser } from "../../utils/helper";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 import events from "../../event.json";
 
 export default function Rightbar({ profile }) {
   const [user] = useState(getUser());
-  const path = useLocation().pathname;
-  const [friends, setFriends] = useState()
   const HomeRightbar = () => {
     return (
       <>
@@ -21,7 +17,7 @@ export default function Rightbar({ profile }) {
               if (index < 3) {
                 return (
                   <div key={index} className="event-card">
-                    <img className="event-img" src={event.img} alt="event" />
+                    <img className="event-img" src={'../'+event.img} alt="event" />
                     <span className="eventText">
                       <b>{event.date}</b> {event.title}
                     </span>
@@ -55,7 +51,7 @@ export default function Rightbar({ profile }) {
             <span className="rightbarInfoValue">{`${user?.school}`}</span>
           </div>
         </div>
-        <h4 className="rightbarTitle">User friends</h4>
+        <h4 className="rightbarTitle">User Top friends</h4>
         <div className="rightbarFollowings">
           <div className="rightbarFollowing">
             <img

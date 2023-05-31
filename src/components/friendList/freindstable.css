@@ -12,7 +12,7 @@ input[type="text"]::placeholder {
   color: #999;
 }
 
-.friend-list{
+.friend-list {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,4 +104,11 @@ th {
   gap: 10px;
   align-items: center;
   justify-content: center;
+}
+
+.tab-block .nav-tabs>li.active>a,
+.tab-block .nav-tabs>li.active>a:hover,
+.tab-block .nav-tabs>li.active>a:focus {
+  border-bottom: 3px solid #000 !important;
+  box-sizing: border-box !important;
 }

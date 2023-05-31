@@ -111,7 +111,7 @@ export default function Login() {
                 onChange={handleEmailChange}
                 className="fadeIn second" />
               <input
-                type="text"
+                type="password"
                 placeholder="Password"
                 name="password"
                 value={password}

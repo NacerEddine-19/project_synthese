@@ -2,8 +2,10 @@ import './notif.css'
 import { Dropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import request from '../../utils/request';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
-export default function MyDropdown({ icon, notif, post, user, connectedUser, onPostDeleted, isReported }) {
+export default function MyDropdown({ icon, notif, post, user, connectedUser, onPostDeleted, isReported, invite }) {
     const API = process.env.REACT_APP_SERVER_API;
     const isPost = post;
 
@@ -55,6 +57,11 @@ export default function MyDropdown({ icon, notif, post, user, connectedUser, onP
     };
     const renderOption = () => {
         if (!isPost) {
+            if (invite) {
+                return (notif?.map((content, index) => (
+                    <Dropdown.Item key={index} className='invite'><div>{icon}{content}</div><div>{<CheckCircleIcon />}{<HighlightOffIcon />}</div></Dropdown.Item>
+                )))
+            }
             return (
                 notif?.map((content, index) => (
 

@@ -151,12 +151,12 @@ const FriendsTable = () => {
                                     {friend.nom}
                                 </td>
                                 <td className="small">
-                                    {friend.connected ? (
+                                    {!friend.connected ? (
                                         <span className="connected">Connected</span>
                                     ) : (
                                         <span className="not-connected">Not Connected</span>
                                     )}
-                                    {!friend.connected && <span className="red-dot"></span>}
+                                    {friend.connected && <span className="red-dot"></span>}
                                 </td>
                                 <td className="small" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none' }}>
                                     <button

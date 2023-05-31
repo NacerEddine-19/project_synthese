@@ -119,3 +119,7 @@
   object-fit: cover;
   cursor: pointer;
 }
+
+.dropdown-menu.show{
+  inset: -0px 10px auto auto !important;
+}

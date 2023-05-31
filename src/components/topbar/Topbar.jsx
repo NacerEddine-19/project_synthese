@@ -7,7 +7,7 @@ import {
   Chat,
   Notifications,
   HomeRounded,
-  School
+  School,
 } from "@material-ui/icons";
 import SourceRoundedIcon from '@mui/icons-material/SourceRounded';
 import { Link } from "react-router-dom";
@@ -17,7 +17,13 @@ import { getUser } from "../../utils/helper";
 const notification = [
   'Action',
   'Another action',
-  'Something else here'
+  'Something else'
+];
+
+const inviteNotif=[
+  'Ryad a envoyer un invitation',
+  'Imran a envoyer un invitation',
+  'Anass a envoyer un invitation',
 ];
 
 const userProfileNotif = [
@@ -56,7 +62,7 @@ export default function Topbar() {
       <div className="topbarRight">
         <div className="topbarIcons">
           <div className="topbarIconItem">
-            <MyDropdown icon={<Person />} notif={notification} />
+            <MyDropdown icon={<Person />} notif={inviteNotif} invite />
             <span className="topbarIconBadge">{notification.length}</span>
           </div>
           <div className="topbarIconItem">
