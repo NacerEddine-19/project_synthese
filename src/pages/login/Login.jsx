@@ -11,7 +11,7 @@ export default function Login() {
 
   const [email, setEmail] = useState("admin@admin.com"); // majid.nacereddine@ofppt-edu.ma  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const [password, setPassword] = useState("123");
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(localStorage.getItem('user') || null);
 
   useEffect(() => {
     if (user) {

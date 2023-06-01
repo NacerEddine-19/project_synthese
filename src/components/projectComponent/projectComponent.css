@@ -85,13 +85,15 @@
     margin-right: 10px;
     cursor: pointer;
 }
-.card-text{
+
+.card-text {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
     margin-bottom: 1rem !important;
 }
+
 .card-info-left span {
     padding: 8px;
     border-radius: 15px;
@@ -116,4 +118,11 @@
 
 .vote-count {
     margin-left: 5px;
+}
+
+.ReactTags__remove {
+    cursor: pointer;
+    color: red;
+    border-radius: 50px;
+    border: 1px #ccc solid;
 }
