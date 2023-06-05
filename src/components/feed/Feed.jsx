@@ -30,9 +30,19 @@ export default function Feed({ userP, group }) {
           },
         });
       } else if (path === "Profile") {
-        res = await request.get(`${API}/posts/user/${user?.id}`);
+        res = await request.get(`${API}/posts/user/${user?.id}`, {
+          params: {
+            limit: 5,
+            offset: offset,
+          },
+        });
       } else if (path === "Group") {
-        res = await request.get(`${API}/posts/group/${user?.group}`);
+        res = await request.get(`${API}/posts/group/${user?.group}`, {
+          params: {
+            limit: 5,
+            offset: offset,
+          },
+        });
       }
       const { posts, total } = res?.data;
       setPosts((prev) => [...prev, ...posts]);
@@ -106,7 +116,7 @@ export default function Feed({ userP, group }) {
             />
           ))
         )}
-        {isFetching ?(
+        {isFetching ? (
           <LoadingIcon />
         ) : isEnd ? (
           <div>Feeling inspired? Create your own post!</div>
