@@ -11,6 +11,7 @@ import PageNotFound from './pages/page not found/pageNotFound';
 import EventsPage from './pages/events/events';
 import Test from './pages/testing/test';
 import ViewPostPage from './pages/postPage/postPage';
+import Group from './pages/groupPage/groupPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/Courses" element={<Courses />} />
           <Route exact path="/Projects" element={<Projects />} />
           <Route exact path="/Events" element={<EventsPage />} />
+          <Route exact path="/Group" element={<Group />} />
           <Route exact path="/Logout" element={<LogOut />} />
           <Route exact path="/posts/:postId" element={<ViewPostPage />} />
         </Route>

@@ -14,6 +14,8 @@ export default function Post({ post, userP, num, onPostDeleted }) {
   const [assetsPath, setAssetsPath] = useState('assets/');
   const path = useLocation().pathname;
   const API = process.env.REACT_APP_SERVER_API
+  const date = post?.created_at.slice(0, 10);
+  const time = post?.created_at.slice(11, -11);
   const postOptions = [
     'edit',
     'delete',
@@ -47,7 +49,6 @@ export default function Post({ post, userP, num, onPostDeleted }) {
       console.log(error);
     }
   };
-
   return (
     <div className="post">
       <div className="postWrapper">
@@ -58,19 +59,21 @@ export default function Post({ post, userP, num, onPostDeleted }) {
               src={userP ? userP?.pdp : user?.pdp}
               alt=""
             />
-            <span className="postUsername">
-              {userP ? userP.nom : user?.nom} {userP ? userP?.nom : user?.prenom}
-            </span>
-            <span className="postDate">{post?.date}</span>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <span className="postUsername">
+                {userP ? userP.nom : user?.nom} {userP ? userP?.prenom : user?.prenom}
+              </span>
+              <span className="postDate"><div>{date}</div><div>{time}</div></span>
+            </div>
           </div>
           <div className="postTopRight">
-            <MyDropdown icon={<MoreVert />} isReported={post.is_reported} onPostDeleted={onPostDeleted} notif={postOptions} post={post} user={user} connectedUser={connectedUser} />
+            <MyDropdown icon={<MoreVert />} isReported={post?.is_reported} onPostDeleted={onPostDeleted} notif={postOptions} post={post} user={user} connectedUser={connectedUser} />
           </div>
         </div>
         <Link to={`/posts/${post?.id_post}`} className="link-wrapper">
           <div className="postCenter" style={{ display: path === '/Profile' ? 'flex' : 'block', flexDirection: 'column' }}>
             <span className="postText">{post?.post_desc}</span>
-            {post.file && <img className="postImg" src={`${assetsPath}post/${post?.file}`} alt={post?.desc} />}
+            {post?.file && <img className="postImg" src={`${assetsPath}post/${post?.file}`} alt={post?.desc} />}
           </div>
         </Link>
         <div className="postBottom">

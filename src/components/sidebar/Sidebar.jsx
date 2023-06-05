@@ -42,8 +42,10 @@ export default function Sidebar() {
             </Link>
           </li>
           <li className="sidebarListItem">
-            <Group className="sidebarIcon" />
-            <span className="sidebarListItemText">Group</span>
+            <Link to={`/Group`}>
+              <Group className="sidebarIcon" />
+              <span className="sidebarListItemText">Group</span>
+            </Link>
           </li>
           <li className="sidebarListItem">
             <Bookmark className="sidebarIcon" />
