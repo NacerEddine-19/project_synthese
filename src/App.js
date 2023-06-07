@@ -14,6 +14,7 @@ import ViewPostPage from './pages/postPage/postPage';
 import Group from './pages/groupPage/groupPage';
 
 function App() {
+  // useNProgress()
   return (
     <Router>
       <Routes>

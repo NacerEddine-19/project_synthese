@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 export default function ThemeSwitch() {
     const getInitialTheme = () => {
-        const savedTheme = localStorage.getItem('theme');
+        const savedTheme = sessionStorage.getItem('theme');
         return savedTheme ? savedTheme : (
             window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
         );
@@ -13,7 +13,7 @@ export default function ThemeSwitch() {
 
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
+        sessionStorage.setItem('theme', theme);
     }, [theme]);
 
     const toggleTheme = () => {
