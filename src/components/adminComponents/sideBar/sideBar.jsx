@@ -1,91 +1,120 @@
-export default function SideBar() {
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import './sideBar.css';
+import { getUser } from '../../../utils/helper';
+
+export default function AdminSideBar() {
+    const path = useLocation().pathname;
+    const [user] = useState(getUser());
+    useEffect(() => {
+        const visitedLinks = document.querySelectorAll('.main-menu a');
+        visitedLinks.forEach((link) => {
+            if (link.pathname === path) {
+                link.classList.add('visited')
+            }
+        })
+    }, [path]);
     return (
-        <div className="container-fluid">
-            <div className="row flex-nowrap">
-                <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-                    <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                        <a href="/" className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span className="fs-5 d-none d-sm-inline">Menu</span>
-                        </a>
-                        <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                            <li className="nav-item">
-                                <a href="/" className="nav-link align-middle px-0">
-                                    <i className="fs-4 bi-house"></i> <span className="ms-1 d-none d-sm-inline">Home</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="somethingsubmenu1" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                                    <i className="fs-4 bi-speedometer2"></i> <span className="ms-1 d-none d-sm-inline">Dashboard</span> </a>
-                                <ul className="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="somethingmenu">
-                                    <li className="w-100">
-                                        <a href="/" className="nav-link px-0"> <span className="d-none d-sm-inline">Item</span> 1 </a>
-                                    </li>
-                                    <li>
-                                        <a href="/" className="nav-link px-0"> <span className="d-none d-sm-inline">Item</span> 2 </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="/" className="nav-link px-0 align-middle">
-                                    <i className="fs-4 bi-table"></i> <span className="ms-1 d-none d-sm-inline">Orders</span></a>
-                            </li>
-                            <li>
-                                <a href="somethingsubmenu2" data-bs-toggle="collapse" className="nav-link px-0 align-middle ">
-                                    <i className="fs-4 bi-bootstrap"></i> <span className="ms-1 d-none d-sm-inline">Bootstrap</span></a>
-                                <ul className="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="somethingmenu">
-                                    <li className="w-100">
-                                        <a href="/" className="nav-link px-0"> <span className="d-none d-sm-inline">Item</span> 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="/" className="nav-link px-0"> <span className="d-none d-sm-inline">Item</span> 2</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="somethingsubmenu3" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                                    <i className="fs-4 bi-grid"></i> <span className="ms-1 d-none d-sm-inline">Products</span> </a>
-                                <ul className="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="somethingmenu">
-                                    <li className="w-100">
-                                        <a href="/" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="/" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="/" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 3</a>
-                                    </li>
-                                    <li>
-                                        <a href="/" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 4</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="/" className="nav-link px-0 align-middle">
-                                    <i className="fs-4 bi-people"></i> <span className="ms-1 d-none d-sm-inline">Customers</span> </a>
-                            </li>
-                        </ul>
-                        <hr />
-                        <div className="dropdown pb-4">
-                            <a href="/" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" className="rounded-circle" />
-                                <span className="d-none d-sm-inline mx-1">loser</span>
-                            </a>
-                            <ul className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                                <li><a className="dropdown-item" href="/">New project...</a></li>
-                                <li><a className="dropdown-item" href="/">Settings</a></li>
-                                <li><a className="dropdown-item" href="/">Profile</a></li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li><a className="dropdown-item" href="/">Sign out</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div className="col py-3">
-                    <h3>Left Sidebar with Submenus</h3>
-                </div>
-            </div>
-        </div>
+        <nav className="main-menu">
+            <ul>
+                <li>
+                    <Link to="/adminDash/Profile">
+                        <div className="fa"><img className='profil-img' src={user?.pdp} alt={user?.nom} /></div>
+                        <span className="nav-text">
+                            Profile
+                        </span>
+
+                    </Link>
+
+                </li>
+                <li>
+                    <Link to="/adminDash">
+                        <i className="fa fa-home fa-2x"></i>
+                        <span className="nav-text">
+                            Dashboard
+                        </span>
+                    </Link>
+
+                </li>
+                <li className="has-subnav">
+                    <Link to="/">
+                        <i className="fa fa-globe fa-2x"></i>
+                        <span className="nav-text">
+                            Global Surveyors
+                        </span>
+                    </Link>
+
+                </li>
+                <li className="has-subnav">
+                    <Link to="/">
+                        <i className="fa fa-comments fa-2x"></i>
+                        <span className="nav-text">
+                            Group Hub Forums
+                        </span>
+                    </Link>
+
+                </li>
+                <li className="has-subnav">
+                    <Link to="/">
+                        <i className="fa fa-camera-retro fa-2x"></i>
+                        <span className="nav-text">
+                            Survey Photos
+                        </span>
+                    </Link>
+
+                </li>
+                <li>
+                    <Link to="/">
+                        <i className="fa fa-film fa-2x"></i>
+                        <span className="nav-text">
+                            Surveying Tutorials
+                        </span>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/">
+                        <i className="fa fa-book fa-2x"></i>
+                        <span className="nav-text">
+                            Surveying Jobs
+                        </span>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/">
+                        <i className="fa fa-cogs fa-2x"></i>
+                        <span className="nav-text">
+                            Tools & Resources
+                        </span>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/">
+                        <i className="fa fa-map-marker fa-2x"></i>
+                        <span className="nav-text">
+                            Member Map
+                        </span>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/">
+                        <i className="fa fa-info fa-2x"></i>
+                        <span className="nav-text">
+                            Documentation
+                        </span>
+                    </Link>
+                </li>
+            </ul>
+
+            <ul className="logout">
+                <li>
+                    <Link to="/logout">
+                        <i className="fa fa-power-off fa-2x"></i>
+                        <span className="nav-text">
+                            Logout
+                        </span>
+                    </Link>
+                </li>
+            </ul>
+        </nav>
     );
 }

@@ -55,6 +55,7 @@ export default function Post({ post, userP, num, onPostDeleted }) {
         <div className="postTop">
           <div className="postTopLeft">
             <img
+              loading="lazy"
               className="postProfileImg"
               src={userP ? userP?.pdp : user?.pdp}
               alt=""

@@ -13,18 +13,20 @@ export default function Rightbar({ profile }) {
         <div className="events-bar">
 
           {events.events.map((event, index) => {
-            if (event.categorie = 'Marrakech') {
+            if (event.categorie === 'Marrakech') {
               if (index < 3) {
                 return (
                   <div key={index} className="event-card">
-                    <img className="event-img" src={'../'+event.img} alt="event" />
+                    <img className="event-img" src={'../' + event.img} alt="event" />
                     <span className="eventText">
                       <b>{event.date}</b> {event.title}
                     </span>
                   </div>
                 )
               }
+              return null;
             }
+            return null;
           })}
         </div>
         <h4 className="rightbarTitle">Online Friends</h4>

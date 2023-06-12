@@ -14,11 +14,11 @@ import ViewPostPage from './pages/postPage/postPage';
 import Group from './pages/groupPage/groupPage';
 
 function App() {
-  // useNProgress()
   return (
     <Router>
       <Routes>
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/Logout" element={<LogOut />} />
         <Route element={<UserRoutes />}>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/Profile" element={<Profile />} />
@@ -26,7 +26,6 @@ function App() {
           <Route exact path="/Projects" element={<Projects />} />
           <Route exact path="/Events" element={<EventsPage />} />
           <Route exact path="/Group" element={<Group />} />
-          <Route exact path="/Logout" element={<LogOut />} />
           <Route exact path="/posts/:postId" element={<ViewPostPage />} />
         </Route>
         <Route element={<AdminRoutes />}>

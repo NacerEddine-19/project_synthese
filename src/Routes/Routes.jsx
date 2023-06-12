@@ -1,7 +1,8 @@
 import { useNavigate, Outlet } from "react-router-dom";
 import Login from "../pages/login/Login";
 import { useEffect } from "react";
-import UserLayout from "../pages/userLayout/userLayout";
+import UserLayout from "../pages/Layouts/userLayout";
+import AdminLayout from "../pages/Layouts/adminLayout";
 
 export const UserRoutes = () => {
     const Navigate = useNavigate();
@@ -33,5 +34,10 @@ export const AdminRoutes = () => {
         }
     }, [Navigate, isAuthenticated]);
     const isSuperAdmin = userRole === "super_admin";
-    return isSuperAdmin ? <Outlet /> : <Login />;
+    return isSuperAdmin ?
+        (<AdminLayout>
+            <Outlet />
+        </AdminLayout>)
+        :
+        (<Login />);
 };

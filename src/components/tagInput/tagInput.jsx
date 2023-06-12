@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
 import { WithContext as ReactTags } from 'react-tag-input';
-// import 'react-tag-input/dist/modules/reactTags.css';
 
 export default function TagInputComponent({ placeholder, name, handleTagsChange }) {
     const [tags, setTags] = useState([]);
 
-    console.log({tags});
+    console.log({ tags });
 
     useEffect(() => {
         handleTagsChange(tags);
-    }, [tags]);
+    }, [tags, handleTagsChange]);
 
     const handleDelete = i => {
         setTags(tags.filter((tag, index) => index !== i));
