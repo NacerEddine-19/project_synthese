@@ -6,9 +6,9 @@ import AdminLayout from "../pages/Layouts/adminLayout";
 
 export const UserRoutes = () => {
     const Navigate = useNavigate();
-    const isAuthenticated = sessionStorage.getItem('user');
+    const isAuthenticated = localStorage.getItem('user');
 
-    const userRole = sessionStorage.getItem("role"); // Get the user's role
+    const userRole = localStorage.getItem("role"); // Get the user's role
     useEffect(() => {
         if (!isAuthenticated) {
             Navigate("/login");
@@ -25,9 +25,9 @@ export const UserRoutes = () => {
 };
 export const AdminRoutes = () => {
     const Navigate = useNavigate();
-    const isAuthenticated = sessionStorage.getItem('user');
+    const isAuthenticated = localStorage.getItem('user');
 
-    const userRole = sessionStorage.getItem("role"); // Get the user's role
+    const userRole = localStorage.getItem("role"); // Get the user's role
     useEffect(() => {
         if (!isAuthenticated) {
             Navigate("/login");

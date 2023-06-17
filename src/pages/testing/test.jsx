@@ -1,56 +1,31 @@
-import React from 'react';
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-// import faker from 'faker';
+import * as React from 'react';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import ViewPostPage from '../postPage/postPage';
 
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend
-);
+function SimpleDialog(props) {
+    const { onClose, id, open } = props;
 
-export const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: 'top',
-        },
-        title: {
-            display: true,
-            text: 'Chart.js Bar Chart',
-        },
-    },
-};
+    const handleClose = () => {
+        onClose();
+    };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July','zeb'];
+    return (
+        <Dialog onClose={handleClose} open={open}>
+            <DialogTitle>View post avec id : <i><b>{id}</b></i></DialogTitle>
+            <ViewPostPage id={id} />
+        </Dialog>
+    );
+}
 
-export const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Dataset 1',
-            data: labels.map(() => 100),
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-        {
-            label: 'Dataset 2',
-            data: labels.map(() => 120),
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-    ],
-};
-
-export default function Test() {
-    return <Bar options={options} data={data} />;
+export default function SimpleDialogDemo({ id, handleClose, open }) {
+    return (
+        <div>
+            <SimpleDialog
+                id={id}
+                open={open}
+                onClose={handleClose}
+            />
+        </div>
+    );
 }

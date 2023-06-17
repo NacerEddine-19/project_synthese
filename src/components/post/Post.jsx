@@ -50,51 +50,54 @@ export default function Post({ post, userP, num, onPostDeleted }) {
     }
   };
   return (
-    <div className="post">
-      <div className="postWrapper">
-        <div className="postTop">
-          <div className="postTopLeft">
-            <img
-              loading="lazy"
-              className="postProfileImg"
-              src={userP ? userP?.pdp : user?.pdp}
-              alt=""
-            />
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-              <span className="postUsername">
-                {userP ? userP.nom : user?.nom} {userP ? userP?.prenom : user?.prenom}
-              </span>
-              <span className="postDate"><div>{date}</div><div>{time}</div></span>
+    <>
+      {post && <div className="post">
+        <div className="postWrapper">
+          <div className="postTop">
+            <div className="postTopLeft">
+              {user?.pdp && <img
+                loading="lazy"
+                className="postProfileImg"
+                src={userP ? userP?.pdp : user?.pdp}
+                alt=""
+              />}
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <span className="postUsername">
+                  {userP ? userP.nom : user?.nom} {userP ? userP?.prenom : user?.prenom}
+                </span>
+                <span className="postDate"><div>{date}</div><div>{time}</div></span>
+              </div>
+            </div>
+            <div className="postTopRight">
+              <MyDropdown icon={<MoreVert />} isReported={post?.is_reported} onPostDeleted={onPostDeleted} notif={postOptions} post={post} user={user} connectedUser={connectedUser} />
             </div>
           </div>
-          <div className="postTopRight">
-            <MyDropdown icon={<MoreVert />} isReported={post?.is_reported} onPostDeleted={onPostDeleted} notif={postOptions} post={post} user={user} connectedUser={connectedUser} />
-          </div>
-        </div>
-        <Link to={`/posts/${post?.id_post}`} className="link-wrapper">
-          <div className="postCenter" style={{ display: path === '/Profile' ? 'flex' : 'block', flexDirection: 'column' }}>
-            <span className="postText">{post?.post_desc}</span>
-            {post?.file && <img className="postImg" src={`${assetsPath}post/${post?.file}`} alt={post?.desc} />}
-          </div>
-        </Link>
-        <div className="postBottom">
-          <div className="postBottomLeft">
-            {isLiked ? (
-              <Favorite style={{ color: 'red' }} className="likeIcon" onClick={likeHandler} />
-            ) : (
-              <FavoriteBorderRounded className="likeIcon" onClick={likeHandler} />
-            )}
-            <span className="postLikeCounter">
-              {like === 0
-                ? 'No likes yet'
-                : `${like} ${like === 1 ? 'person' : 'people'} like it`}
-            </span>
-          </div>
-          <div className="postBottomRight">
-            <span className="postCommentText"><h6 style={{ display: "inline" }}>{num}</h6> comments</span>
+          <Link to={`/posts/${post?.id_post}`} className="link-wrapper">
+            <div className="postCenter" style={{ display: path === '/Profile' ? 'flex' : 'block', flexDirection: 'column' }}>
+              <span className="postText">{post?.post_desc}</span>
+              {post?.file && <img className="postImg" src={`${assetsPath}post/${post?.file}`} alt={post?.desc} />}
+            </div>
+          </Link>
+          <div className="postBottom">
+            <div className="postBottomLeft">
+              {isLiked ? (
+                <Favorite style={{ color: 'red' }} className="likeIcon" onClick={likeHandler} />
+              ) : (
+                <FavoriteBorderRounded className="likeIcon" onClick={likeHandler} />
+              )}
+              <span className="postLikeCounter">
+                {like === 0
+                  ? 'No likes yet'
+                  : `${like} ${like === 1 ? 'person' : 'people'} like it`}
+              </span>
+            </div>
+            <div className="postBottomRight">
+              <span className="postCommentText"><h6 style={{ display: "inline" }}>{num}</h6> comments</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      }
+    </>
   );
 }

@@ -11,27 +11,27 @@ export default function Login() {
 
   const [email, setEmail] = useState("admin@admin.com"); // majid.nacereddine@ofppt-edu.ma  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const [password, setPassword] = useState("123");
-  const [user, setUser] = useState(sessionStorage.getItem('user') || null);
+  const [user, setUser] = useState(localStorage.getItem('user') || null);
 
   useEffect(() => {
     if (user) {
       const userStr = JSON.stringify(user);
       const role = user.role;
-      if (!sessionStorage.getItem('user')) {
-        sessionStorage.setItem("user", userStr);
+      if (!localStorage.getItem('user')) {
+        localStorage.setItem("user", userStr);
       }
-      if (!sessionStorage.getItem('role')) {
-        sessionStorage.setItem("role", role);
+      if (!localStorage.getItem('role')) {
+        localStorage.setItem("role", role);
       }
     }
-    if (["admin", "stagier"].includes(sessionStorage.getItem('role')) && user) {
+    if (["admin", "stagier"].includes(localStorage.getItem('role')) && user) {
       try {
         navigate("/");
       } catch (ex) {
         console.log(ex);
         // window.location.reload(true)
       }
-    } else if (sessionStorage.getItem('role') === "super_admin" && user) {
+    } else if (localStorage.getItem('role') === "super_admin" && user) {
       try {
         navigate("/adminDash");
       } catch (ex) {
@@ -95,7 +95,7 @@ export default function Login() {
         </div>
         <div className="wrapper fadeInDown">
           <div id="formContent">
-            <h2 className="active"> Sign In </h2>
+            <h2 className="active h2"> Sign In </h2>
 
             <div className="fadeIn first">
               <img src="/assets/ofppt-logo/png/logo-no-background.png" id="icon" alt="User Icon" />

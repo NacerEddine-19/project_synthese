@@ -5,7 +5,7 @@ import Post from '../../components/post/Post';
 import './postPage.css'
 import { getUser } from '../../utils/helper';
 
-export default function ViewPostPage() {
+export default function ViewPostPage({ id }) {
     const { postId } = useParams();
     const API = process.env.REACT_APP_SERVER_API;
     const user = getUser();
@@ -19,7 +19,7 @@ export default function ViewPostPage() {
 
     useEffect(() => {
         // Fetch post and comments
-        request.get(`${API}/posts/${postId}`)
+        request.get(`${API}/posts/${postId || id}`)
             .then(({ data }) => {
                 setPost(data[0]);
                 setComments(data[1]);
@@ -27,7 +27,7 @@ export default function ViewPostPage() {
             .catch(error => {
                 console.error(error);
             });
-    }, [postId, API]);
+    }, [postId, API, id]);
 
     const handleAddComment = () => {
         // Send new comment to the server

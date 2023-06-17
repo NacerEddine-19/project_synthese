@@ -12,6 +12,8 @@ import EventsPage from './pages/events/events';
 import Test from './pages/testing/test';
 import ViewPostPage from './pages/postPage/postPage';
 import Group from './pages/groupPage/groupPage';
+import UsersManage from './pages/adminPages/manageUsers/manageUsers';
+import PostManage from './pages/adminPages/managePosts/managePosts';
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
         </Route>
         <Route element={<AdminRoutes />}>
           <Route exact path="/adminDash" element={<MainDash />} />
+          <Route exact path="/ManageUsers" element={<UsersManage />} />
+          <Route exact path="/ManagePosts" element={<PostManage />} />
         </Route>
         <Route exact path="/test" element={<Test />} />
         <Route path='*' element={<PageNotFound />}></Route>

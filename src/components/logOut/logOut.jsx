@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function LogOut() {
     const navigate = useNavigate();
-    sessionStorage.removeItem('user')
-    sessionStorage.removeItem('role')
+    localStorage.removeItem('user')
+    localStorage.removeItem('role')
     useEffect(() => {
         navigate('/login')
         return () => {

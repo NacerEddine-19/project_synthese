@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './sideBar.css';
 import { getUser } from '../../../utils/helper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhotoFilm, faUser } from '@fortawesome/free-solid-svg-icons';
 
 export default function AdminSideBar() {
     const path = useLocation().pathname;
@@ -10,10 +12,21 @@ export default function AdminSideBar() {
         const visitedLinks = document.querySelectorAll('.main-menu a');
         visitedLinks.forEach((link) => {
             if (link.pathname === path) {
-                link.classList.add('visited')
+                link.classList.add('visited');
+            } else {
+                link.classList.remove('visited');
             }
-        })
+        });
     }, [path]);
+
+    useEffect(() => {
+        return () => {
+            const visitedLinks = document.querySelectorAll('.main-menu a');
+            visitedLinks.forEach((link) => {
+                link.classList.remove('visited');
+            });
+        };
+    }, []);
     return (
         <nav className="main-menu">
             <ul>
@@ -37,19 +50,21 @@ export default function AdminSideBar() {
 
                 </li>
                 <li className="has-subnav">
-                    <Link to="/">
-                        <i className="fa fa-globe fa-2x"></i>
+                    <Link to="/ManageUsers">
+                        <i className='fa'>
+                            <FontAwesomeIcon icon={faUser} />
+                        </i>
                         <span className="nav-text">
-                            Global Surveyors
+                            Gestion des Utilisateur
                         </span>
                     </Link>
 
                 </li>
                 <li className="has-subnav">
-                    <Link to="/">
-                        <i className="fa fa-comments fa-2x"></i>
+                    <Link to="/ManagePosts">
+                        <i className="fa"><FontAwesomeIcon icon={faPhotoFilm} /></i>
                         <span className="nav-text">
-                            Group Hub Forums
+                            Gestion des Posts
                         </span>
                     </Link>
 

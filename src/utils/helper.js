@@ -5,7 +5,7 @@ const api = process.env.REACT_APP_SERVER_API;
 
 export const getUser = () => {
     try {
-        let user = sessionStorage.getItem('user');
+        let user = localStorage.getItem('user');
         if (!user) {
             return null;
         }

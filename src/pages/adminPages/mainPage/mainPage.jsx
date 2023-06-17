@@ -1,5 +1,9 @@
+import { PieChart } from "../../../components/CHARTS/usersPieChart";
+import '../adminStyle.css'
 export default function MainDash() {
     return (
-        <div>main dash</div>
+        <div className='users-chart'>
+                <PieChart />
+            </div>
     );
 }

@@ -140,10 +140,10 @@ const FriendsTable = () => {
             {isLoading ?
                 <LoadingIcon />
                 :
-                <table>
+                <table className='friends-table'>
                     <tbody>
                         {filteredFriends?.map((friend) => (
-                            <tr key={friend.id}>
+                            <tr className='friends-tr' key={friend.id}>
                                 <td className="small">
                                     <img className='friend-img' src={friend.pdp} alt={friend.nom} />
                                 </td>

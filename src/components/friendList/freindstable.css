@@ -26,12 +26,12 @@ input[type="text"]::placeholder {
   height: 100vh;
 }
 
-table {
+.friends-table {
   border-collapse: collapse;
   width: 80%;
 }
 
-tr {
+.friends-tr {
   border: none;
   border-radius: 20px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
