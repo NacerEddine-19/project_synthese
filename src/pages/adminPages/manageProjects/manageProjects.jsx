@@ -1,23 +1,25 @@
 import { useEffect, useState } from "react";
-import PostsTable from "../../../components/adminComponents/tables/postTable";
 import request from "../../../utils/request";
+import ProjectsTable from "../../../components/adminComponents/tables/projectsTable";
 
 const API = process.env.REACT_APP_SERVER_API;
-export default function PostManage() {
+export default function ProjectsManage() {
     const [data, setData] = useState([]);
 
-    const deletePost = (id) => {
+    const deleteProject = (id) => {
         console.log(id);
-        request.delete(`${API}/posts/${id}`)
+        request.delete(`${API}/projects/${id}`)
             .then(res => {
                 setData((prevData) => prevData.filter((user) => user.id !== id));
-                alert('post deleted successfully')
+                alert('project deleted successfully')
             })
     }
+
     useEffect(() => {
-        request.get(`${API}/posts`)
+        request.get(`${API}/projects`)
             .then(res => {
-                setData(res.data.posts);
+                console.log(res);
+                setData(res.data)
             })
             .catch(error => {
                 console.log(error);
@@ -25,7 +27,7 @@ export default function PostManage() {
     }, []);
     return (
         <>
-            {data && <PostsTable deletePost={deletePost} data={data} />}
+            {data && <ProjectsTable deleteProject={deleteProject} data={data} />}
         </>
     );
 }

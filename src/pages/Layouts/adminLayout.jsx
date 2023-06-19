@@ -14,15 +14,15 @@ export default function AdminLayout({ children }) {
         };
     }, [location]);
     return (
-        <div className={`main`}>
+        <>
             <AdminSideBar />
             <div className="area">
                 <PrimarySearchAppBar />
-                <div><Link to={`/adminDash`}>
-                    <Home  />
+                <div style={{ marginBottom: 80 }}><Link to={`/adminDash`}> {/*style={{ marginTop: 100 }}*/}
+                    <Home />
                 </Link> / {path}</div>
                 {children}
             </div>
-        </div>
+        </>
     )
 }

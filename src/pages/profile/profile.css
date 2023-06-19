@@ -2,7 +2,9 @@
     display: flex;
     min-width: 80%;
 }
-
+.profileRightTop{
+    margin-bottom: 40px;
+}
 .profileRight{
     flex : 8;
 }

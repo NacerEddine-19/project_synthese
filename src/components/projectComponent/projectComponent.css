@@ -119,10 +119,3 @@
 .vote-count {
     margin-left: 5px;
 }
-
-.ReactTags__remove {
-    cursor: pointer;
-    color: red;
-    border-radius: 50px;
-    border: 1px #ccc solid;
-}

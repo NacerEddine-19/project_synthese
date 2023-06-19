@@ -4,6 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import request from '../../utils/request';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { IconButton } from '@mui/material';
 
 export default function MyDropdown({ icon, notif, post, user, connectedUser, onPostDeleted, isReported, invite }) {
     const API = process.env.REACT_APP_SERVER_API;
@@ -59,7 +60,17 @@ export default function MyDropdown({ icon, notif, post, user, connectedUser, onP
         if (!isPost) {
             if (invite) {
                 return (notif?.map((content, index) => (
-                    <Dropdown.Item key={index} className='invite'><div>{icon}{content}</div><div>{<CheckCircleIcon />}{<HighlightOffIcon />}</div></Dropdown.Item>
+                    <Dropdown.Item key={index} className='invite'>
+                        <div>{icon}{content}</div>
+                        <div>
+                            <IconButton aria-label="checkCircle">
+                                <CheckCircleIcon />
+                            </IconButton>
+                            <IconButton aria-label="delete">
+                                <HighlightOffIcon />
+                            </IconButton>
+                        </div>
+                    </Dropdown.Item>
                 )))
             }
             return (

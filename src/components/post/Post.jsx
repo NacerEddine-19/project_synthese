@@ -8,7 +8,7 @@ import request from "../../utils/request";
 
 export default function Post({ post, userP, num, onPostDeleted }) {
   const [connectedUser] = useState(getUser());
-  const [user] = useState(post?.user);
+  const [user, setUser] = useState(post?.user);
   const [like, setLike] = useState(post?.likes);
   const [isLiked, setIsLiked] = useState(false);
   const [assetsPath, setAssetsPath] = useState('assets/');
@@ -21,6 +21,9 @@ export default function Post({ post, userP, num, onPostDeleted }) {
     'delete',
     'report'
   ];
+  useEffect(() => {
+    setUser(post?.user);
+  }, [post]);
 
   useEffect(() => {
     setAssetsPath(path === `/posts/${post?.id_post}` ? '../assets/' : 'assets/');
@@ -55,12 +58,12 @@ export default function Post({ post, userP, num, onPostDeleted }) {
         <div className="postWrapper">
           <div className="postTop">
             <div className="postTopLeft">
-              {user?.pdp && <img
+              <img
                 loading="lazy"
                 className="postProfileImg"
                 src={userP ? userP?.pdp : user?.pdp}
-                alt=""
-              />}
+                alt={`${user?.nom} ${user?.prenom}`}
+              />
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <span className="postUsername">
                   {userP ? userP.nom : user?.nom} {userP ? userP?.prenom : user?.prenom}
@@ -75,7 +78,7 @@ export default function Post({ post, userP, num, onPostDeleted }) {
           <Link to={`/posts/${post?.id_post}`} className="link-wrapper">
             <div className="postCenter" style={{ display: path === '/Profile' ? 'flex' : 'block', flexDirection: 'column' }}>
               <span className="postText">{post?.post_desc}</span>
-              {post?.file && <img className="postImg" src={`${assetsPath}post/${post?.file}`} alt={post?.desc} />}
+              {post?.file && <img className="postImg" src={`${post?.file}`} alt={post?.desc} />}
             </div>
           </Link>
           <div className="postBottom">

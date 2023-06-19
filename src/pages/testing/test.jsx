@@ -1,31 +1,34 @@
-import * as React from 'react';
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
-import ViewPostPage from '../postPage/postPage';
+import { useEffect, useState } from "react";
+import request from "../../utils/request";
+import ProjectsTable from "../../components/adminComponents/tables/projectsTable";
 
-function SimpleDialog(props) {
-    const { onClose, id, open } = props;
+const API = process.env.REACT_APP_SERVER_API;
+export default function Test() {
+    const [data, setData] = useState([]);
 
-    const handleClose = () => {
-        onClose();
-    };
+    const deleteUser = (id) => {
+        console.log(id);
+        request.delete(`${API}/users/${id}`)
+            .then(res => {
+                console.log(res)
+                setData((prevData) => prevData.filter((user) => user.id !== id));
+                alert('user deleted successfully')
+            })
+    }
 
+    useEffect(() => {
+        request.get(`${API}/projects`)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
     return (
-        <Dialog onClose={handleClose} open={open}>
-            <DialogTitle>View post avec id : <i><b>{id}</b></i></DialogTitle>
-            <ViewPostPage id={id} />
-        </Dialog>
-    );
-}
-
-export default function SimpleDialogDemo({ id, handleClose, open }) {
-    return (
-        <div>
-            <SimpleDialog
-                id={id}
-                open={open}
-                onClose={handleClose}
-            />
-        </div>
+        <>
+            {/* {data && <ProjectsTable data={data} />} */}
+            <div></div>
+        </>
     );
 }

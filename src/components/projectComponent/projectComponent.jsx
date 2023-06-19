@@ -1,25 +1,59 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaThumbsUp, FaThumbsDown, FaFileDownload } from 'react-icons/fa';
 import './projectComponent.css'; // Styling
 import TagInputComponent from '../tagInput/tagInput';
 import request from '../../utils/request';
+import { getUser } from '../../utils/helper';
 
-export default function ProjectComponent() {
-    const API = process.env.REACT_APP_SERVER_API;
-    const [projects, setProjects] = useState([
-        { name: 'Project 1', team: ['Omar', 'Nacer', 'Ryad', 'Mouhcine'], languages: ['py', 'js', 'html', 'React'], likes: 5, dislikes: 1, file: null },
-        { name: 'Project 2', team: ['Oussama', 'Nacer', 'Majdi', 'Hiba'], languages: ['py', 'js', 'html', 'React'], likes: 5, dislikes: 1, file: null },
-        { name: 'Project 3', team: ['Oumaima', 'Taha', 'Anass', 'Imad'], languages: ['py', 'js', 'html', 'React'], likes: 5, dislikes: 1, file: null },
-    ]); // Array to store projects
+const API = process.env.REACT_APP_SERVER_API;
+export default function ProjectComponent({ data, deleteProject }) {
+    console.log(API);
+    const [user, setUser] = useState(getUser());
+    const [friends, setFriends] = useState()
+    const [user_id, setUser_id] = useState()
+    const [projects, setProjects] = useState(data); // Array to store projects
     const [searchQuery, setSearchQuery] = useState(''); // Search bar query
     const [showAddForm, setShowAddForm] = useState(false); // Toggle add project form
     const [newProject, setNewProject] = useState({ // State for new project form fields
         name: '',
-        team: [],
+        users: [],
         languages: [],
         file: null
     });
     console.log({ projects });
+    useEffect(() => {
+        setUser_id(user?.id);
+        return () => {
+            setUser_id(null);
+        };
+    }, [user]);
+
+    useEffect(() => {
+        request.post(`${API}/friends`, {
+            user_id
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    const data = response.data;
+                    return data;
+                } else {
+                    console.error('Error occurred during login');
+                }
+            }
+            ).then(data => {
+                setFriends(data);
+            }
+            )
+        return () => {
+            setFriends(null);
+        };
+    }, [user_id]);
+    useEffect(() => {
+        setProjects(data)
+        return () => {
+            setProjects(null)
+        };
+    }, [data]);
 
     // Function to handle form input changes
     const handleInputChange = (e) => {
@@ -40,26 +74,26 @@ export default function ProjectComponent() {
     // Function to handle adding a new project
     const handleAddProject = () => {
         // Add form validation logic if needed
-        if (newProject.name !== null && newProject.team !== null && newProject.languages !== null && newProject.file !== null) {
+        if (newProject.name !== null && newProject.users !== null && newProject.languages !== null && newProject.file !== null) {
             setProjects([...projects, { ...newProject, likes: 0, dislikes: 0 }]);
             console.log({ newProject });
-            try {
-                // Make API request to store project
-                request.post('/api/projects', newProject)
-                    .then((response) => {
-                        console.log('Project stored successfully!', response.data);
-                        // Handle success, such as displaying a success message or redirecting
-                    })
-                    .catch((error) => {
-                        console.error('Error storing project:', error);
-                        // Handle error, such as displaying an error message
-                    });
-            } catch {
+            // try {
+            //     // Make API request to store project
+            //     request.post('/api/projects', newProject)
+            //         .then((response) => {
+            //             console.log('Project stored successfully!', response.data);
+            //             // Handle success, such as displaying a success message or redirecting
+            //         })
+            //         .catch((error) => {
+            //             console.error('Error storing project:', error);
+            //             // Handle error, such as displaying an error message
+            //         });
+            // } catch {
 
-            }
+            // }
             setNewProject({
                 name: '',
-                team: [],
+                users: [],
                 languages: [],
                 file: null
             });
@@ -71,30 +105,32 @@ export default function ProjectComponent() {
         // Download button logic
     };
 
-    // Function to handle liking a project
-    const handleLike = (index) => {
-        const updatedProjects = [...projects];
-        updatedProjects[index].likes++;
-        setProjects(updatedProjects);
+    const handleVote = (index, type) => {
+        setProjects((prevProjects) => {
+            const updatedProjects = [...prevProjects];
+            const project = updatedProjects[index];
+
+            if (type === 'like') {
+                project.likes++;
+            } else if (type === 'dislike') {
+                project.dislikes++;
+            }
+
+            return updatedProjects;
+        });
     };
 
-    // Function to handle disliking a project
-    const handleDislike = (index) => {
-        const updatedProjects = [...projects];
-        updatedProjects[index].dislikes++;
-        setProjects(updatedProjects);
-    };
 
     // Function to filter projects based on search query
     const filteredProjects = projects.filter((project) => {
         const name = project.name.toLowerCase();
-        const team = project.team.map((user) => user.toLowerCase());
+        const users = project.users.map((user) => user.nom.toLowerCase());
         return (
             name.includes(searchQuery.toLowerCase()) ||
-            team.some((user) => user.includes(searchQuery.toLowerCase()))
+            users.some((user) => user.nom.includes(searchQuery.toLowerCase()))
         );
     });
-
+    console.log({ filteredProjects });
     //handle tag change
     const handleTagsChange = (tags, property) => {
         setNewProject({
@@ -102,7 +138,13 @@ export default function ProjectComponent() {
             [property]: tags.map((tag) => tag.text),
         });
     };
-
+    const suggestions = friends?.map(user => {
+        return {
+            id: `${user?.nom}`,
+            text: `${user?.nom}`
+        }
+    }) || [];
+    console.log({ suggestions });
     return (
         <div className="project-component">
             <div className="header">
@@ -131,15 +173,18 @@ export default function ProjectComponent() {
                                 value={newProject.name}
                                 onChange={handleInputChange}
                             />
+
                             <TagInputComponent
-                                placeholder={'Project Team'}
-                                name={'team'}
-                                handleTagsChange={(tags) => handleTagsChange(tags, 'team')}
+                                placeholder={'Project users'}
+                                name={'users'}
+                                handleTagsChange={(tags) => handleTagsChange(tags, 'users')}
+                                suggestions={suggestions}
                             />
                             <TagInputComponent
                                 placeholder={'Project Languages'}
                                 name={'languages'}
                                 handleTagsChange={(tags) => handleTagsChange(tags, 'languages')}
+                                suggestions={suggestions}
                             />
                             <input
                                 type="file"
@@ -165,8 +210,8 @@ export default function ProjectComponent() {
                             <div className="card-info">
                                 <div className="card-info-left">
                                     <h2 className="card-title">{project.name}</h2>
-                                    <p className="card-text">Team: {project.team?.map((member, idx) => (<span key={idx}>{member}</span>))}</p>
-                                    <p className="card-text">Languages: {project.languages?.map((lang, idx) => (<span key={idx}>{lang}</span>))}</p>
+                                    <p className="card-text">users: {project.users?.map((member, idx) => (<span key={idx}>{member.nom}</span>))}</p>
+                                    <p className="card-text">Languages: {project.languages?.map((lang, idx) => (<span key={idx}>{lang.name}</span>))}</p>
                                 </div>
                                 <div className="card-info-right">
                                     <button className="btn btn-success" onClick={handleDownload}>
@@ -175,11 +220,11 @@ export default function ProjectComponent() {
                                 </div>
                             </div>
                             <div className="card-footer">
-                                <button className="btn btn-primary" onClick={() => handleLike(index)}>
+                                <button className="btn btn-primary" onClick={() => handleVote(index, 'like')}>
                                     <FaThumbsUp className="like-icon" />
                                     <span className="vote-count">{project.likes}</span>
                                 </button>
-                                <button className="btn btn-danger" onClick={() => handleDislike(index)}>
+                                <button className="btn btn-danger" onClick={() => handleVote(index, 'dislike')}>
                                     <FaThumbsDown className="dislike-icon" />
                                     <span className="vote-count">{project.dislikes}</span>
                                 </button>

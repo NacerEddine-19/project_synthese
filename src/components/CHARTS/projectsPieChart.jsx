@@ -13,9 +13,9 @@ export function UserPieChart({ className }) {
     const [admins, setAdmins] = useState(0);
     const [stagiers, setStagiers] = useState(0);
     const [superAdmins, setSuperAdmins] = useState(0);
-    console.log(fetchedData);
+
     useEffect(() => {
-        request.get(`${API}/users`)
+        request.get(`${API}/Projects`)
             .then(res => {
                 setFetchedData(res.data);
                 return res.data;

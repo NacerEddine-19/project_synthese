@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import './sideBar.css';
 import { getUser } from '../../../utils/helper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhotoFilm, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCodeFork, faPhotoFilm, faUser } from '@fortawesome/free-solid-svg-icons';
 
 export default function AdminSideBar() {
     const path = useLocation().pathname;
@@ -70,15 +70,15 @@ export default function AdminSideBar() {
 
                 </li>
                 <li className="has-subnav">
-                    <Link to="/">
-                        <i className="fa fa-camera-retro fa-2x"></i>
+                    <Link to="/ManageProjects">
+                        <i className="fa"><FontAwesomeIcon icon={faCodeFork} /></i>
                         <span className="nav-text">
-                            Survey Photos
+                            Gestion des Projects
                         </span>
                     </Link>
 
                 </li>
-                <li>
+                {/* <li>
                     <Link to="/">
                         <i className="fa fa-film fa-2x"></i>
                         <span className="nav-text">
@@ -117,7 +117,7 @@ export default function AdminSideBar() {
                             Documentation
                         </span>
                     </Link>
-                </li>
+                </li> */}
             </ul>
 
             <ul className="logout">

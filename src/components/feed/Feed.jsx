@@ -45,6 +45,7 @@ export default function Feed({ userP, group }) {
         });
       }
       const { posts, total } = res?.data;
+      console.log(res);
       setPosts((prev) => [...prev, ...posts]);
       setTotal(total);
     } catch (error) {
@@ -90,6 +91,7 @@ export default function Feed({ userP, group }) {
   }, [path, API, offset, fetchPosts]);
 
   const handlePostAdded = (newPost) => {
+    console.log(newPost);
     setPosts((prevPosts) => [newPost, ...prevPosts]);
   };
 

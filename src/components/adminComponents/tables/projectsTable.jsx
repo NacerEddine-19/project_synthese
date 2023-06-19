@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { memo } from 'react';
 import Avatar from '@mui/material/Avatar';
+import AvatarGroup from '@mui/material/AvatarGroup';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -16,40 +17,35 @@ import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { visuallyHidden } from '@mui/utils';
 import './table.css'
-import { Button, ButtonGroup } from '@mui/material';
+import { Button, ButtonGroup, IconButton, Tooltip, Zoom } from '@mui/material';
 import { Visibility } from '@material-ui/icons';
-import SimpleDialogDemo from '../../simpleDialog/simpleDialog';
+import SimpleDialogDemo from '../../../pages/testing/test';
+import { FaFileDownload } from 'react-icons/fa';
 
 const headCells = [
     {
         id: 'nom',
         numeric: false,
         disablePadding: false,
-        label: 'Utilisateur',
+        label: 'Nom du Project',
     },
     {
-        id: 'role',
+        id: 'users',
         numeric: false,
         disablePadding: false,
-        label: 'Role',
+        label: 'Programmers',
     },
     {
         id: 'created_at',
         numeric: false,
         disablePadding: false,
-        label: 'Date de creation du post',
+        label: 'Date de creation du projet',
     },
     {
-        id: 'post_desc',
+        id: 'file',
         numeric: false,
         disablePadding: false,
-        label: 'Description du post',
-    },
-    {
-        id: 'status',
-        numeric: false,
-        disablePadding: false,
-        label: 'Status (reporter ou non)',
+        label: 'Fichier du Projet',
     },
     {
         id: 'likes',
@@ -58,10 +54,10 @@ const headCells = [
         label: 'Likes',
     },
     {
-        id: 'comments',
+        id: 'dislikes',
         numeric: false,
         disablePadding: false,
-        label: 'Comments',
+        label: 'Dislikes',
     },
     {
         id: 'action',
@@ -82,9 +78,6 @@ const EnhancedTableHead = memo((props) => {
     return (
         <TableHead>
             <TableRow>
-                <TableCell align={`center`} style={{ fontWeight: 900 }} padding="checkbox">
-                    Profile
-                </TableCell>
                 {headCells.map((headCell) => (
 
                     <TableCell
@@ -117,21 +110,21 @@ const EnhancedTableToolbar = memo(() => {
     return (
         <Toolbar className="table-head" sx={{ pl: { sm: 2 }, pr: { xs: 1, sm: 1 } }}>
             <Typography sx={{ flex: '1 1 100%' }} variant="h6" id="tableTitle" component="div">
-                TABLE DES POSTS
+                TABLE DES PROJETS
             </Typography>
         </Toolbar>
     );
 });
 
 
-export default function PostsTable({ deletePost, data }) {
+export default function ProjectsTable({ deletePost, data }) {
     const [open, setOpen] = useState(false);
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('id_post');
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [id, setId] = useState();
-
+    console.log(data);
     const descendingComparator = useCallback((a, b, orderBy) => {
         if (b[orderBy] < a[orderBy]) {
             return -1;
@@ -223,12 +216,9 @@ export default function PostsTable({ deletePost, data }) {
                                     <TableRow
                                         hover
                                         tabIndex={-1}
-                                        key={row.id_post}
+                                        key={row.id}
                                         sx={{ cursor: 'pointer' }}
                                     >
-                                        <TableCell padding="normal">
-                                            <Avatar alt="Profile Picture" src={row.user.pdp} />
-                                        </TableCell>
 
                                         <TableCell
                                             component="th"
@@ -237,14 +227,31 @@ export default function PostsTable({ deletePost, data }) {
                                             padding="normal"
                                             style={{ fontSize: 16, fontWeight: 500 }}
                                         >
-                                            {`${row.user.nom} ${row.user.prenom}`}
+                                            {`${row.name}`}
                                         </TableCell>
-                                        <TableCell align="center">{row.user.role === 'super_admin' ? 'super admin' : row.user.role}</TableCell>
+                                        <TableCell align="center">
+                                            <Tooltip
+                                                TransitionComponent={Zoom} placement="right-start"
+                                                title={row.users.map((user, idx) => {
+                                                    return (<div style={{ display: 'flex', alignItems: "center", gap: 5, justifyContent: 'flex-start' }}>
+                                                        <Avatar key={idx} alt="Profile Picture" src={user.pdp} />
+                                                        {user.nom} {user.prenom}
+                                                    </div>)
+                                                })}
+                                            >
+                                                <AvatarGroup style={{ flexDirection: "row" }} max={4}>
+                                                    {row.users.map((user, idx) => {
+                                                        return (<Avatar key={idx} alt="Profile Picture" src={user.pdp} />)
+                                                    })}
+                                                </AvatarGroup>
+                                            </Tooltip>
+                                        </TableCell>
                                         <TableCell align="center">{row.created_at.slice(0, 10)}</TableCell>
-                                        <TableCell align="center">{row.post_desc}</TableCell>
-                                        <TableCell align="center" style={{ color: row.is_reported ? 'red' : '' }}>{row.is_reported ? 'reported' : 'not reported'}</TableCell>
+                                        <TableCell align="center"><IconButton aria-label="download" style={{ backgroundColor: 'green' }}>
+                                            <FaFileDownload style={{ backGroundColor: 'green' }} className="download-icon" />
+                                        </IconButton></TableCell>
                                         <TableCell align="center">{row.likes}</TableCell>
-                                        <TableCell align="center">{row.comments.length}</TableCell>
+                                        <TableCell align="center">{row.dislikes}</TableCell>
                                         <TableCell align="center">
                                             <ButtonGroup>
                                                 <Button variant="outlined" onClick={() => deletePost(row.id_post)} color="error" startIcon={<DeleteIcon />}>
