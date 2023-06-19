@@ -21,7 +21,7 @@ export default function ChangePass() {
         return () => {
             setUser()
         };
-    }, []);
+    }, [navigate]);
     console.log({ 'pass': user });
 
     const handleSubmit = useCallback(
