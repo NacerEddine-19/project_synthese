@@ -15,6 +15,7 @@ import Group from './pages/groupPage/groupPage';
 import UsersManage from './pages/adminPages/manageUsers/manageUsers';
 import PostManage from './pages/adminPages/managePosts/managePosts';
 import ProjectsManage from './pages/adminPages/manageProjects/manageProjects';
+import ChangePass from './pages/login/changePassword';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/Logout" element={<LogOut />} />
+        <Route exact path="/changePassword" element={<ChangePass />} />
         <Route element={<UserRoutes />}>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/Profile" element={<Profile />} />

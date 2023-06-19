@@ -18,6 +18,7 @@ export default function Feed({ userP, group }) {
   const [isFetching, setIsFetching] = useState(false);
   const [total, setTotal] = useState(0);
   const [isEnd, setIsEnd] = useState(false);
+  const [groupName, setGroupName] = useState('');
 
   const fetchPosts = useCallback(async () => {
     try {
@@ -86,6 +87,20 @@ export default function Feed({ userP, group }) {
   }, [isFetching]);
 
   useEffect(() => {
+    console.log(group);
+    if (group) {
+      request.get(`${API}/groups/${user?.group}`)
+        .then(({ data }) => {
+          console.log(data);
+          setGroupName(data.name)
+        });
+    }
+    return () => {
+      setGroupName('')
+    };
+  }, [user?.group, group, API]);
+
+  useEffect(() => {
     setLoading(true);
     fetchPosts();
   }, [path, API, offset, fetchPosts]);
@@ -101,6 +116,7 @@ export default function Feed({ userP, group }) {
 
   return (
     <div className="feed">
+      {group && <h1 style={{ textAlign: 'center' }}>Group : {groupName}</h1>}
       {error ? error : ''}
       <div className="feedWrapper">
         <Share onPostAdded={handlePostAdded} />

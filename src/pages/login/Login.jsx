@@ -29,7 +29,7 @@ export default function Login() {
     };
 
     checkUser();
-  }, []);
+  }, [navigate]);
 
   const handleSubmit = useCallback(
     async (event) => {
@@ -42,10 +42,10 @@ export default function Login() {
 
         if (response.status === 200) {
           const data = response.data;
+          console.log(data);
           if (data && data.length > 0) {
             const user = data[0];
             setUser(user);
-            localStorage.setItem("user", JSON.stringify(user));
           } else {
             console.error("No user found");
           }
@@ -53,7 +53,7 @@ export default function Login() {
           console.error("Error occurred during login");
         }
       } catch (error) {
-        console.error(error);
+        console.error({ error });
       }
     },
     [email, password]
@@ -67,15 +67,21 @@ export default function Login() {
     setPassword(event.target.value);
   }, []);
 
+  console.log({ 'login': user });
   useEffect(() => {
     if (user) {
-      const role = user.role;
-      localStorage.setItem("role", role);
+      localStorage.setItem("user", JSON.stringify(user));
+      if (user.first_time === 1) {
+        navigate("/changePassword");
+      } else {
+        const role = user.role;
+        localStorage.setItem("role", role);
 
-      if (["admin", "stagier"].includes(role)) {
-        navigate("/");
-      } else if (role === "super_admin") {
-        navigate("/adminDash");
+        if (["admin", "stagier"].includes(role)) {
+          navigate("/");
+        } else if (role === "super_admin") {
+          navigate("/adminDash");
+        }
       }
     }
   }, [user, navigate]);
