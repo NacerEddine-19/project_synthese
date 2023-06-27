@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import request from "../../utils/request";
 
 import "./login.css";
@@ -12,6 +12,11 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [inputRef]);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -67,7 +72,6 @@ export default function Login() {
     setPassword(event.target.value);
   }, []);
 
-  console.log({ 'login': user });
   useEffect(() => {
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
@@ -103,6 +107,8 @@ export default function Login() {
               </div>
               <form onSubmit={handleSubmit}>
                 <input
+                  autoFocus
+                  ref={inputRef}
                   type="text"
                   placeholder="Email"
                   name="email"

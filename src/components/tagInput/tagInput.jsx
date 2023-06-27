@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import { WithContext as ReactTags } from 'react-tag-input';
 import './tags.css'
 
-export default function TagInputComponent({ placeholder, name, handleTagsChange, suggestions }) {
+export default function TagInputComponent({ placeholder, name, handleTagsChange, suggestionsFriends, suggestionsLanguages }) {
+
     const [tags, setTags] = useState([]);
+    // console.log({suggestionsFriends})
+    // console.log({suggestionsLanguages})
 
     console.log({ tags });
 
@@ -35,9 +38,9 @@ export default function TagInputComponent({ placeholder, name, handleTagsChange,
 
     return (
         <div>
-            <ReactTags
+            {suggestionsFriends ? <ReactTags
                 tags={tags}
-                suggestions={suggestions}
+                suggestions={suggestionsFriends}
                 // delimiters={delimiters}
                 handleDelete={handleDelete}
                 handleAddition={handleAddition}
@@ -47,7 +50,20 @@ export default function TagInputComponent({ placeholder, name, handleTagsChange,
                 autocomplete
                 placeholder={placeholder}
                 name={name}
-            />
+            /> :
+                <ReactTags
+                    tags={tags}
+                    suggestions={suggestionsLanguages}
+                    // delimiters={delimiters}
+                    handleDelete={handleDelete}
+                    handleAddition={handleAddition}
+                    handleDrag={handleDrag}
+                    handleTagClick={handleTagClick}
+                    inputFieldPosition="bottom"
+                    autocomplete
+                    placeholder={placeholder}
+                    name={name}
+                />}
         </div>
     );
 }

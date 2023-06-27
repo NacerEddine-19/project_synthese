@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { FaThumbsUp, FaThumbsDown, FaFileDownload } from 'react-icons/fa';
 import './projectComponent.css'; // Styling
 import TagInputComponent from '../tagInput/tagInput';
@@ -6,10 +6,12 @@ import request from '../../utils/request';
 import { getUser } from '../../utils/helper';
 
 const API = process.env.REACT_APP_SERVER_API;
-export default function ProjectComponent({ data, deleteProject }) {
-    console.log(API);
-    const [user, setUser] = useState(getUser());
-    const [friends, setFriends] = useState()
+export default function ProjectComponent({ data, deleteProject, fetchProjects }) {
+    const [user] = useState(getUser());
+    const [friends, setFriends] = useState([])
+    const [suggestionsFriends, setSuggestionsFriends] = useState([]);
+    const [languages, setLanguages] = useState([]);
+    const [suggestionsLanguages, setSuggestionsLanguages] = useState([]);
     const [user_id, setUser_id] = useState()
     const [projects, setProjects] = useState(data); // Array to store projects
     const [searchQuery, setSearchQuery] = useState(''); // Search bar query
@@ -37,7 +39,7 @@ export default function ProjectComponent({ data, deleteProject }) {
                     const data = response.data;
                     return data;
                 } else {
-                    console.error('Error occurred during login');
+                    console.error('Error occurred during fetching friends');
                 }
             }
             ).then(data => {
@@ -48,6 +50,26 @@ export default function ProjectComponent({ data, deleteProject }) {
             setFriends(null);
         };
     }, [user_id]);
+    useEffect(() => {
+        request.get(`${API}/languages`)
+            .then(response => {
+                if (response.status === 200) {
+                    const data = response.data;
+                    // console.log({ data });
+                    return data;
+                } else {
+                    console.error('Error occurred during fetching languages');
+                }
+            }
+            ).then(data => {
+                setLanguages(data);
+            }
+            )
+        return () => {
+            setLanguages([]);
+        };
+    }, []);
+    // console.log({ languages });
     useEffect(() => {
         setProjects(data)
         return () => {
@@ -77,20 +99,21 @@ export default function ProjectComponent({ data, deleteProject }) {
         if (newProject.name !== null && newProject.users !== null && newProject.languages !== null && newProject.file !== null) {
             setProjects([...projects, { ...newProject, likes: 0, dislikes: 0 }]);
             console.log({ newProject });
-            // try {
-            //     // Make API request to store project
-            //     request.post('/api/projects', newProject)
-            //         .then((response) => {
-            //             console.log('Project stored successfully!', response.data);
-            //             // Handle success, such as displaying a success message or redirecting
-            //         })
-            //         .catch((error) => {
-            //             console.error('Error storing project:', error);
-            //             // Handle error, such as displaying an error message
-            //         });
-            // } catch {
+            try {
+                // Make API request to store project
+                request.post('/api/projects', newProject)
+                    .then((response) => {
+                        console.log('Project stored successfully!', response.data);
+                        fetchProjects();
+                        // Handle success, such as displaying a success message or redirecting
+                    })
+                    .catch((error) => {
+                        console.error('Error storing project:', error);
+                        // Handle error, such as displaying an error message
+                    });
+            } catch {
 
-            // }
+            }
             setNewProject({
                 name: '',
                 users: [],
@@ -123,28 +146,42 @@ export default function ProjectComponent({ data, deleteProject }) {
 
     // Function to filter projects based on search query
     const filteredProjects = projects.filter((project) => {
-        const name = project.name.toLowerCase();
-        const users = project.users.map((user) => user.nom.toLowerCase());
+        const name = project?.name?.toLowerCase();
+        const users = project?.users?.map((user) => user?.nom?.toLowerCase());
         return (
-            name.includes(searchQuery.toLowerCase()) ||
-            users.some((user) => user.nom.includes(searchQuery.toLowerCase()))
+            name?.includes(searchQuery.toLowerCase()) ||
+            users?.some((user) => user?.includes(searchQuery.toLowerCase()))
         );
     });
-    console.log({ filteredProjects });
     //handle tag change
-    const handleTagsChange = (tags, property) => {
-        setNewProject({
-            ...newProject,
-            [property]: tags.map((tag) => tag.text),
-        });
-    };
-    const suggestions = friends?.map(user => {
-        return {
-            id: `${user?.nom}`,
-            text: `${user?.nom}`
-        }
-    }) || [];
-    console.log({ suggestions });
+    const handleTagsChange = useCallback((tags, property) => {
+        setNewProject((prevProject) => ({
+          ...prevProject,
+          [property]: tags.map((tag) => tag.id),
+        }));
+      }, []);
+    // console.log({friends});
+    useEffect(() => {
+        setSuggestionsFriends(friends?.map(user => {
+            return {
+                id: `${user?.id}`,
+                text: `${user?.nom}`
+            }
+        }) || []);
+        setSuggestionsLanguages(languages?.map(lang => {
+            return {
+                id: `${lang?.id}`,
+                text: `${lang?.name}`
+            }
+        }) || []);
+
+        return () => {
+            setSuggestionsFriends([]);
+            setSuggestionsLanguages([]);
+        };
+    }, [friends, languages]);
+    // console.log({ suggestionsFriends });
+    // console.log({ suggestionsLanguages });
     return (
         <div className="project-component">
             <div className="header">
@@ -175,16 +212,16 @@ export default function ProjectComponent({ data, deleteProject }) {
                             />
 
                             <TagInputComponent
-                                placeholder={'Project users'}
+                                placeholder={'Project team'}
                                 name={'users'}
                                 handleTagsChange={(tags) => handleTagsChange(tags, 'users')}
-                                suggestions={suggestions}
+                                suggestionsFriends={suggestionsFriends}
                             />
                             <TagInputComponent
                                 placeholder={'Project Languages'}
                                 name={'languages'}
                                 handleTagsChange={(tags) => handleTagsChange(tags, 'languages')}
-                                suggestions={suggestions}
+                                suggestionsLanguages={suggestionsLanguages}
                             />
                             <input
                                 type="file"

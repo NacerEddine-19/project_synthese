@@ -1,34 +1,16 @@
-import { useEffect, useState } from "react";
-import request from "../../utils/request";
-import ProjectsTable from "../../components/adminComponents/tables/projectsTable";
+import { Person } from "@material-ui/icons";
+import './test.css'
+import Card from "../../components/card/card";
 
-const API = process.env.REACT_APP_SERVER_API;
 export default function Test() {
-    const [data, setData] = useState([]);
-
-    const deleteUser = (id) => {
-        console.log(id);
-        request.delete(`${API}/users/${id}`)
-            .then(res => {
-                console.log(res)
-                setData((prevData) => prevData.filter((user) => user.id !== id));
-                alert('user deleted successfully')
-            })
-    }
-
-    useEffect(() => {
-        request.get(`${API}/projects`)
-            .then(res => {
-                console.log(res.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }, []);
     return (
         <>
-            {/* {data && <ProjectsTable data={data} />} */}
-            <div></div>
+            <div className={`test`}>
+                <Card title={`title1`} icon={<Person />} percentage={50} data={555} />
+                <Card title={`title1`} icon={<Person />} percentage={50} data={555} />
+                <Card title={`title1`} icon={<Person />} percentage={50} data={555} />
+                <Card title={`title1`} icon={<Person />} percentage={50} data={555} />
+            </div>
         </>
     );
 }

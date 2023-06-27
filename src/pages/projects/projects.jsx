@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import ProjectComponent from "../../components/projectComponent/projectComponent";
 import request from "../../utils/request";
 // import "./courses.css"
-
+const MemoizedProjectComponent = memo(ProjectComponent);
 const API = process.env.REACT_APP_SERVER_API;
 export default function Projects() {
     const [data, setData] = useState([]);
@@ -15,17 +15,21 @@ export default function Projects() {
                 alert('project deleted successfully')
             })
     }
-
-    useEffect(() => {
-        request.get(`${API}/projects`)
-            .then(res => {
-                setData(res.data)
+    const fetchProjects = () => {
+        request
+            .get(`${API}/projects`)
+            .then((response) => {
+                setData(response.data);
             })
-            .catch(error => {
+            .catch((error) => {
                 console.log(error);
             });
+    };
+
+    useEffect(() => {
+        fetchProjects();
     }, []);
     return (
-        <ProjectComponent data={data} deleteProject={deleteProject}  />
+        <MemoizedProjectComponent data={data} deleteProject={deleteProject} fetchProjects={fetchProjects} />
     );
 }

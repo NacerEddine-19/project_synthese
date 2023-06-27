@@ -22,7 +22,6 @@ export default function ChangePass() {
             setUser()
         };
     }, [navigate]);
-    console.log({ 'pass': user });
 
     const handleSubmit = useCallback(
         async (event) => {
