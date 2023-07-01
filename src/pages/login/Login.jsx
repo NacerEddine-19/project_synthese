@@ -91,51 +91,52 @@ export default function Login() {
   }, [user, navigate]);
   return (
     <>
-      {loading ? <LoadingIcon /> : <div className="login">
-        <div className="loginWrapper">
-          <div className="loginLeft">
-            <h3 className="loginLogo">The OFPPT Social Network</h3>
-            <span className="loginDesc">
-              Connect, Learn, Grow
-            </span>
-          </div>
-          <div className="wrapper fadeInDown">
-            <div id="formContent">
-              <h2 className="active h2"> Sign In </h2>
-              <div className="fadeIn first">
-                <img src="/assets/ofppt-logo/png/logo-no-background.png" id="icon" alt="User Icon" />
-              </div>
-              <form onSubmit={handleSubmit}>
-                <input
-                  autoFocus
-                  ref={inputRef}
-                  type="text"
-                  placeholder="Email"
-                  name="email"
-                  value={email}
-                  onChange={handleEmailChange}
-                  className="fadeIn second" />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  className="fadeIn third"
-                />
-                <input
-                  type="submit"
-                  className="fadeIn fourth"
-                  value={`Login`}
-                />
-              </form>
-              <div id="formFooter">
-                <a className="underlineHover" href="something">Forgot Password?</a>
+      {loading ? <LoadingIcon /> :
+        !user && <div className="login">
+          <div className="loginWrapper">
+            <div className="loginLeft">
+              <h3 className="loginLogo">The OFPPT Social Network</h3>
+              <span className="loginDesc">
+                Connect, Learn, Grow
+              </span>
+            </div>
+            <div className="wrapper fadeInDown">
+              <div id="formContent">
+                <h2 className="active h2"> Sign In </h2>
+                <div className="fadeIn first">
+                  <img src="/assets/ofppt-logo/png/logo-no-background.png" id="icon" alt="User Icon" />
+                </div>
+                <form onSubmit={handleSubmit}>
+                  <input
+                    autoFocus
+                    ref={inputRef}
+                    type="text"
+                    placeholder="Email"
+                    name="email"
+                    value={email}
+                    onChange={handleEmailChange}
+                    className="fadeIn second" />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    className="fadeIn third"
+                  />
+                  <input
+                    type="submit"
+                    className="fadeIn fourth"
+                    value={`Login`}
+                  />
+                </form>
+                <div id="formFooter">
+                  <a className="underlineHover" href="something">Forgot Password?</a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>}
+        </div>}
     </>
   );
 }

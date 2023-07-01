@@ -11,7 +11,6 @@ export default function Post({ post, userP, num, onPostDeleted }) {
   const [user, setUser] = useState(post?.user);
   const [like, setLike] = useState(post?.likes);
   const [isLiked, setIsLiked] = useState(false);
-  const [assetsPath, setAssetsPath] = useState('assets/');
   const path = useLocation().pathname;
   const API = process.env.REACT_APP_SERVER_API
   const date = post?.created_at.slice(0, 10);
@@ -24,13 +23,6 @@ export default function Post({ post, userP, num, onPostDeleted }) {
   useEffect(() => {
     setUser(post?.user);
   }, [post]);
-
-  useEffect(() => {
-    setAssetsPath(path === `/posts/${post?.id_post}` ? '../assets/' : 'assets/');
-    return () => {
-      setAssetsPath('');
-    };
-  }, [path, post?.id_post]);
 
   const likeHandler = async () => {
 

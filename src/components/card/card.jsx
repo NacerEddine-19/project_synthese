@@ -22,8 +22,8 @@ export default function Card({ title, icon, percentage, data, color }) {
                     <hr className="hr"></hr>
                     <div className={`down-part`}>
                         <p>
-                            <span style={{ color: percentage[1] ? 'red' : 'rgb(76, 175, 80)' }}>{percentage[1] ? '-' : '+'}<CountUp end={percentage[0]} />% &nbsp;</span>
-                            than last month
+                            <span style={{ color: percentage[1] ? 'red' : 'rgb(76, 175, 80)' }}>{percentage[1] ? '' : '+'}<CountUp end={percentage[0]} />% &nbsp;</span>
+                            {percentage[1] ? 'less ' : 'more '} than last month
                         </p>
                     </div>
                 </div>

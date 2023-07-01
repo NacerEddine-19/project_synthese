@@ -1,77 +1,53 @@
-import React, { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import request from '../../utils/request';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export function UserPieChart({ className }) {
-    const API = process.env.REACT_APP_SERVER_API;
-    const [fetchedData, setFetchedData] = useState();
-    const labels = ['Admin', 'Stagier', 'Super Admin'];
+export const UserPieChart = memo(({ className, data, labels, title }) => {
     const [dataChart, setData] = useState();
-    const [admins, setAdmins] = useState(0);
-    const [stagiers, setStagiers] = useState(0);
-    const [superAdmins, setSuperAdmins] = useState(0);
-    // console.log(fetchedData);
-    useEffect(() => {
-        request.get(`${API}/users`)
-            .then(res => {
-                setFetchedData(res.data);
-                return res.data;
-            })
-            .then(data => {
-                let adminCount = 0;
-                let stagierCount = 0;
-                let superAdminCount = 0;
 
-                data.forEach(user => {
-                    if (user.role === 'admin') {
-                        adminCount++;
-                    } else if (user.role === 'stagier') {
-                        stagierCount++;
-                    } else if (user.role === 'super_admin') {
-                        superAdminCount++;
-                    }
-                });
-
-                setAdmins(adminCount);
-                setStagiers(stagierCount);
-                setSuperAdmins(superAdminCount);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }, [API]);
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: title,
+            },
+        },
+    };
 
     useEffect(() => {
         setData({
             labels: labels,
             datasets: [
                 {
-                    label: ' COUNT ',
-                    data: [admins, stagiers, superAdmins],
+                    label: ' Users Count ',
+                    data: data,
                     backgroundColor: [
-                        '#C4B0FF',
-                        '#4942E4',
-                        '#8696FE',
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
+                        '#9966FF',
+                        '#C9CBCF',
+                        '#059BFF',
+                        '#4BC0C0',
+                        '#FFCD56',
+                        '#FF9F40',
+                        '#FF6384',
+                        '#8685FE',
                     ],
                     borderWidth: 1,
                 },
             ],
         });
-    }, [admins, stagiers, superAdmins]);
+    }, [data, labels]);
 
     return (
         <>
             {dataChart && <div className={`${className} pie-chart`}>
-                <Pie data={dataChart} />
+                <Pie options={options} data={dataChart} />
             </div>}
         </>
     );
-}
+});
