@@ -49,25 +49,25 @@ export default function ViewPostPage({ id }) {
 
     return (
         <div className='post-page'>
-            {post && <Post post={post} num={comments.length} />}
+            {post && <Post post={post} num={comments?.length} />}
 
             <h3>Comments</h3>
-            {comments.length === 0 ? (
+            {comments?.length === 0 ? (
                 <p>No comments yet.</p>
             ) : (
                 <ul>
-                    {comments.map(comment => (
-                        <li className='comment' key={comment.id}>
+                    {comments?.map(comment => (
+                        <li className='comment' key={comment?.id}>
                             <div className="profile-pic">
                                 <img
                                     className="postProfileImg"
-                                    src={`${comment.user.pdp}`}
-                                    alt={`${comment.user.nom}`}
+                                    src={`${comment?.user?.pdp}`}
+                                    alt={`${comment?.user?.nom}`}
                                 />
                             </div>
                             <div className="comment-info">
-                                <h5>{comment.user.nom}</h5>
-                                <p>{comment.content}</p>
+                                <h5>{comment?.user?.nom}</h5>
+                                <p>{comment?.content}</p>
                             </div>
                         </li>
                     ))}

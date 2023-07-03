@@ -5,7 +5,7 @@ import request from '../../utils/request';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export function UserPieChart({ className }) {
+export function PieChart({ className }) {
     const API = process.env.REACT_APP_SERVER_API;
     const [fetchedData, setFetchedData] = useState();
     const labels = ['Admin', 'Stagier', 'Super Admin'];

@@ -213,7 +213,7 @@ export default function PostsTable({ deletePost, data }) {
                             order={order}
                             orderBy={orderBy}
                             onRequestSort={handleRequestSort}
-                            rowCount={data.length}
+                            rowCount={data?.length}
                         />
                         <TableBody>
                             {visibleRows.map((row, index) => {
@@ -223,11 +223,11 @@ export default function PostsTable({ deletePost, data }) {
                                     <TableRow
                                         hover
                                         tabIndex={-1}
-                                        key={row.id_post}
+                                        key={row?.id_post}
                                         sx={{ cursor: 'pointer' }}
                                     >
                                         <TableCell padding="normal">
-                                            <Avatar alt="Profile Picture" src={row.user.pdp} />
+                                            <Avatar alt="Profile Picture" src={row?.user?.pdp} />
                                         </TableCell>
 
                                         <TableCell
@@ -237,20 +237,20 @@ export default function PostsTable({ deletePost, data }) {
                                             padding="normal"
                                             style={{ fontSize: 16, fontWeight: 500 }}
                                         >
-                                            {`${row.user.nom} ${row.user.prenom}`}
+                                            {`${row?.user?.nom} ${row?.user?.prenom} id: ${row?.user?.id}`}
                                         </TableCell>
-                                        <TableCell align="center">{row.user.role === 'super_admin' ? 'super admin' : row.user.role}</TableCell>
-                                        <TableCell align="center">{row.created_at.slice(0, 10)}</TableCell>
-                                        <TableCell align="center">{row.post_desc}</TableCell>
-                                        <TableCell align="center" style={{ color: row.is_reported ? 'red' : '' }}>{row.is_reported ? 'reported' : 'not reported'}</TableCell>
-                                        <TableCell align="center">{row.likes}</TableCell>
-                                        <TableCell align="center">{row.comments.length}</TableCell>
+                                        <TableCell align="center">{row?.user?.role === 'super_admin' ? 'super admin' : row?.user?.role}</TableCell>
+                                        <TableCell align="center">{row?.created_at.slice(0, 10)}</TableCell>
+                                        <TableCell align="center">{row?.post_desc}</TableCell>
+                                        <TableCell align="center" style={{ color: row?.is_reported ? 'red' : '' }}>{row?.is_reported ? 'reported' : 'not reported'}</TableCell>
+                                        <TableCell align="center">{row?.likes}</TableCell>
+                                        <TableCell align="center">{row?.comments.length}</TableCell>
                                         <TableCell align="center">
                                             <ButtonGroup>
-                                                <Button variant="outlined" onClick={() => deletePost(row.id_post)} color="error" startIcon={<DeleteIcon />}>
+                                                <Button variant="outlined" onClick={() => deletePost(row?.id_post)} color="error" startIcon={<DeleteIcon />}>
                                                     Delete
                                                 </Button>
-                                                <Button variant="outlined" onClick={() => handleClickOpen(row.id_post)} color="success" startIcon={<Visibility />}>
+                                                <Button variant="outlined" onClick={() => handleClickOpen(row?.id_post)} color="success" startIcon={<Visibility />}>
                                                     View
                                                 </Button>
                                             </ButtonGroup>

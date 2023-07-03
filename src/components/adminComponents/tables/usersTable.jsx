@@ -13,6 +13,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import BlockIcon from '@mui/icons-material/Block';
+import RestoreIcon from '@mui/icons-material/Restore';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { visuallyHidden } from '@mui/utils';
 import './table.css'
@@ -130,7 +131,7 @@ const EnhancedTableToolbar = memo(() => {
 });
 
 
-export default function UsersTable({ deleteUser, data }) {
+export default function UsersTable({ deleteUser, data, banUser, unbanUser }) {
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('id');
     const [page, setPage] = useState(0);
@@ -218,9 +219,15 @@ export default function UsersTable({ deleteUser, data }) {
                                                     >
                                                         Delete
                                                     </Button>
-                                                    <Button variant="outlined" color="error" startIcon={<BlockIcon />}>
-                                                        Ban
-                                                    </Button>
+
+                                                    {!row.is_banned ?
+                                                        <Button variant="outlined" color="error" startIcon={<BlockIcon />} onClick={() => banUser(row.id)}>
+                                                            Ban
+                                                        </Button>
+                                                        :
+                                                        <Button variant="outlined" color="success" startIcon={<RestoreIcon />} onClick={() => unbanUser(row.id)}>
+                                                            UnBan
+                                                        </Button>}
                                                 </ButtonGroup>
                                             </TableCell>
                                         </TableRow>

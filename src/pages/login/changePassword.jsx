@@ -27,7 +27,7 @@ export default function ChangePass() {
         async (event) => {
             event.preventDefault();
             try {
-                const response = await request.put(`${SERVER_API}/login/${user?.id}`, {
+                const response = await request.put(`${SERVER_API}/login/pass/${user?.id}`, {
                     oldPassword,
                     newPassword,
                 });

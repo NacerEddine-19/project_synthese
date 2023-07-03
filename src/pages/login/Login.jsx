@@ -47,9 +47,13 @@ export default function Login() {
 
         if (response.status === 200) {
           const data = response.data;
-          console.log(data);
           if (data && data.length > 0) {
             const user = data[0];
+            if (user.is_banned) {
+              alert("User is banned. Please contact support.")
+              console.error("User is banned. Please contact support.");
+              return;
+            }
             setUser(user);
           } else {
             console.error("No user found");
