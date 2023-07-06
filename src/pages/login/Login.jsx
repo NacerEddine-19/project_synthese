@@ -4,6 +4,7 @@ import request from "../../utils/request";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 import LoadingIcon from "../../components/loadingIcon/loadingIcon";
+import Toast from "../../utils/tostify";
 
 const SERVER_API = process.env.REACT_APP_SERVER_API;
 export default function Login() {
@@ -12,6 +13,8 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
+  const [msg, setMsg] = useState(null);
+  const [msgType, setMsgType] = useState(null);
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -50,18 +53,25 @@ export default function Login() {
           if (data && data.length > 0) {
             const user = data[0];
             if (user.is_banned) {
-              alert("User is banned. Please contact support.")
+              setMsg('User is banned. Please contact support.')
+              setMsgType('warning')
               console.error("User is banned. Please contact support.");
               return;
             }
             setUser(user);
           } else {
+            setMsg("No user found")
+            setMsgType('error')
             console.error("No user found");
           }
         } else {
+          setMsg("Error occurred during login")
+          setMsgType('warning')
           console.error("Error occurred during login");
         }
       } catch (error) {
+        setMsg(error.response.data.message)
+        setMsgType('error')
         console.error({ error });
       }
     },
@@ -82,10 +92,13 @@ export default function Login() {
       if (user.first_time === 1) {
         navigate("/changePassword");
       } else {
+        setMsg(`Welcom back ${user.nom}`)
+        setMsgType('success')
         const role = user.role;
         localStorage.setItem("role", role);
 
         if (["admin", "stagier"].includes(role)) {
+
           navigate("/");
         } else if (role === "super_admin") {
           navigate("/adminDash");
@@ -93,6 +106,7 @@ export default function Login() {
       }
     }
   }, [user, navigate]);
+
   return (
     <>
       {loading ? <LoadingIcon /> :
@@ -141,6 +155,7 @@ export default function Login() {
             </div>
           </div>
         </div>}
+      {msg && <Toast text={msg} type={msgType} />}
     </>
   );
 }

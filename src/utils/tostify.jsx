@@ -1,9 +1,10 @@
 
+import { useCallback, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-export default function Test() {
+export default function Toast({ text, type }) {
     const theme = localStorage.getItem('theme');
-    const notify = () => toast('🦄 Wow so easy!', {
+    const notify = useCallback(() => toast(text, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -12,12 +13,14 @@ export default function Test() {
         draggable: true,
         progress: undefined,
         theme,
-        type: "warning"
-    });
+        type: type
+    }), [type, theme, text]);
+    useEffect(() => {
+        notify();
+    }, [text, type, notify]);
     return (
         <>
             <div>
-                <button onClick={notify}>Notify!</button>
                 <ToastContainer />
             </div>
         </>

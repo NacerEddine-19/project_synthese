@@ -204,7 +204,7 @@ export default function UsersTable({ deleteUser, data, banUser, unbanUser }) {
                                                 padding="normal"
                                                 style={{ fontSize: 16, fontWeight: 500 }}
                                             >
-                                                {`${row.nom} ${row.prenom}`}
+                                                {`${row.nom} ${row.prenom} id: ${row.id}`}
                                             </TableCell>
                                             <TableCell align="center">{row.role === 'super_admin' ? 'super admin' : row.role}</TableCell>
                                             <TableCell align="center">{row.created_at.slice(0, 10)}</TableCell>
