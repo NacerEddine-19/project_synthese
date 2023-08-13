@@ -5,13 +5,13 @@ export default function Socials() {
 
     const [user] = useState(getUser());
     const pathname = window.location.pathname;
-    const [websiteLink, setWebsiteLink] = useState(user?.site );
+    const [websiteLink, setWebsiteLink] = useState(user?.site);
     const [githubLink, setGitHubLink] = useState(user?.github);
     const [twitterLink, setTwitterLink] = useState(user?.x);
     const [instagramLink, setInstagramLink] = useState(user?.instagram);
     const [facebookLink, setFacebookLink] = useState(user?.facebook);
-    const [userInfo, setUserInfo] = useState(null);
-    const [error, setError] = useState(null);
+    // const [userInfo, setUserInfo] = useState(null);
+    // const [error, setError] = useState(null);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -35,19 +35,19 @@ export default function Socials() {
                 break;
         }
     };
-    const handleSaveChanges = async () => {
-        console.log("Saving changes...");
-        const updatedUser = {
-            ...user,
-            site: websiteLink,
-            github: githubLink,
-            x: twitterLink,
-            instagram: instagramLink,
-            facebook: facebookLink,
-        };
-        const req = await setUser(updatedUser);
-        console.log(req);
-    };
+    // const handleSaveChanges = async () => {
+    //     console.log("Saving changes...");
+    //     const updatedUser = {
+    //         ...user,
+    //         site: websiteLink,
+    //         github: githubLink,
+    //         x: twitterLink,
+    //         instagram: instagramLink,
+    //         facebook: facebookLink,
+    //     };
+    //     const req = await setUser(updatedUser);
+    //     console.log(req);
+    // };
 
     return (
         <div className="card mt-3">
@@ -248,11 +248,11 @@ export default function Socials() {
                     }
                 </li>
             </ul>
-            {pathname.includes("/edit") && (
+            {/* {pathname.includes("/edit") && (
                 <button className="btn btn-primary mt-3" onClick={handleSaveChanges}>
                     Save
                 </button>
-            )}
+            )} */}
         </div>
     );
 }

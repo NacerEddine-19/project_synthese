@@ -52,7 +52,6 @@ export function EditProfile() {
     useEffect(() => {
         setActiveTab(tab || 'general');
     }, [tab]);
-    const memoizedCities = useMemo(() => cities, [cities]);
     const handleOldPasswordChange = (event) => {
         setOldPassword(event.target.value);
     };
@@ -69,13 +68,7 @@ export function EditProfile() {
     const handleCityChange = (newValue) => {
         setCity(newValue)
     }
-    useEffect(() => {
-
-        console.log({ city });
-        console.log(cities.indexOf(city));
-
-    }, [city, phoneNumber]);
-
+    const memoizedCities = useMemo(() => cities, [cities]);
     return (
         <>
 
@@ -135,15 +128,11 @@ export function EditProfile() {
                                             value={{ label: city, id: cities.indexOf(city) }}
                                             onChange={(e, newValue) => handleCityChange(newValue)}
                                             inputValue={city}
-                                            // onInputChange={(event, newInputValue) => {
-                                            //     setCity(newInputValue);
-                                            // }}
                                             disablePortal
                                             className="form-control"
                                             id="combo-box-demo"
                                             options={memoizedCities}
                                             sx={{ width: 300 }}
-                                            // defaultValue={{ label: city, id: cities.indexOf(city) }}
                                             getOptionLabel={(option) => option.label}
                                             isOptionEqualToValue={(option, value) => option.lable === value}
                                             onInputChange={(e, newValue) => handleCityChange(newValue)}
