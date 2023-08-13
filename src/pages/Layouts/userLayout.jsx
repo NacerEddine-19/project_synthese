@@ -1,12 +1,11 @@
-import { useLocation } from "react-router-dom";
 import Rightbar from "../../components/rightbar/Rightbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 
 export default function UserLayout({ children }) {
-    const location = useLocation();
+    const pathname = window.location.pathname;
 
-    const isProfilePage = location.pathname === '/Profile';
+    const isProfilePage = pathname.includes('/Profile');
     return (
         <>
             <Topbar />

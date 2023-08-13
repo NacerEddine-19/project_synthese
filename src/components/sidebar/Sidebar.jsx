@@ -8,8 +8,10 @@ import {
   School,
 } from "@material-ui/icons";
 import SourceRoundedIcon from '@mui/icons-material/SourceRounded';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { Users } from "../../dummyData";
 import CloseFriend from "../closeFriend/CloseFriend";
+import ShieldIcon from '@mui/icons-material/Shield';
 import Socials from "../socials/socials";
 import { Link } from "react-router-dom";
 
@@ -18,7 +20,29 @@ export default function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
-        <ul className="sidebarList">
+        {pathname.includes('/Profile') && pathname.includes('/edit') ? (
+          <ul className="sidebarList">
+            <li className="sidebarListItem">
+              <Link to={`/Profile/edit?tab=general`}>
+                <SettingsIcon className="sidebarIcon" />
+                <span className="sidebarListItemText">generale</span>
+              </Link>
+            </li>
+            <li className="sidebarListItem">
+              <Link to={`/Profile/edit?tab=socials`}>
+                <Chat className="sidebarIcon" />
+                <span className="sidebarListItemText">socials</span>
+              </Link>
+            </li>
+            <li className="sidebarListItem">
+              <Link to={`/Profile/edit?tab=security`}>
+                <ShieldIcon className="sidebarIcon" />
+                <span className="sidebarListItemText">security</span>
+              </Link>
+            </li>
+
+          </ul>
+        ) : <ul className="sidebarList">
           <li className="sidebarListItem">
             <Link to={`/`}>
               <RssFeed className="sidebarIcon" />
@@ -58,10 +82,11 @@ export default function Sidebar() {
             </Link>
           </li>
         </ul>
+        }
         <button className="sidebarButton">Show More</button>
-        {pathname === '/Profile' ? (< Socials />) : ''}
+        {pathname.includes('/Profile') && !pathname.includes('/edit') ? (< Socials />) : ''}
         <hr className="sidebarHr" />
-        {pathname !== '/Profile' ? <ul className="sidebarFriendList">
+        {!pathname.includes('/Profile') ? <ul className="sidebarFriendList">
           {Users.map((u) => (
             <CloseFriend key={u.id} user={u} />
           ))}

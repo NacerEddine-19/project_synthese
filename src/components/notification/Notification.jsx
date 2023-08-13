@@ -79,7 +79,7 @@ export default function MyDropdown({ icon, notif, post, user, connectedUser, onP
                     <LinkContainer
                         key={index}
                         to={
-                            content === 'Profile' ? '/Profile' : content === 'Settings' ? '/Settings' :
+                            content === 'Profile' ? '/Profile' : content === 'Settings' ? '/Profile/edit' :
                                 content === 'Language' ? '/Language' : content === 'Log out' ? '/Logout' : ''
                         }
                     >

@@ -16,6 +16,7 @@ import UsersManage from './pages/adminPages/manageUsers/manageUsers';
 import PostManage from './pages/adminPages/managePosts/managePosts';
 import ProjectsManage from './pages/adminPages/manageProjects/manageProjects';
 import ChangePass from './pages/login/changePassword';
+import { EditProfile } from './pages/profile/editProfile/editProfile';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route element={<UserRoutes />}>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/Profile" element={<Profile />} />
+          <Route exact path="/Profile/edit" element={<EditProfile />} />
           <Route exact path="/Courses" element={<Courses />} />
           <Route exact path="/Projects" element={<Projects />} />
           <Route exact path="/Events" element={<EventsPage />} />

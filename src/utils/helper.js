@@ -19,15 +19,30 @@ export const getUserById = (id) => {
     try {
         request.post(`${api}/user/${id}`).then(
             (res) => {
-                return res;
-                // if (res.data.success) {
-                //     return res.data.data;
-                // }
-                // return null;
+                if (res.data.success) {
+                    return res.data.data;
+                }
+                return null;
             }
         )
-    }
-    catch (ex) {
+    } catch (ex) {
         return ex;
     }
 }
+export const setUser = async (user) => {
+    try {
+        const response = await request.patch(`${api}/users/${user.id}`, user);
+        console.log({response});
+
+        if (response.status === 200) {
+            localStorage.setItem("user", JSON.stringify(user));
+
+            return response.data;
+        } else {
+            throw new Error("Failed to update user data");
+        }
+    } catch (error) {
+        console.error("Error updating user:", error);
+        throw new Error("Failed to update user data");
+    }
+};

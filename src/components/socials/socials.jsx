@@ -1,4 +1,54 @@
+import { useState } from "react";
+import { getUser, setUser } from "../../utils/helper";
+
 export default function Socials() {
+
+    const [user] = useState(getUser());
+    const pathname = window.location.pathname;
+    const [websiteLink, setWebsiteLink] = useState(user?.site );
+    const [githubLink, setGitHubLink] = useState(user?.github);
+    const [twitterLink, setTwitterLink] = useState(user?.x);
+    const [instagramLink, setInstagramLink] = useState(user?.instagram);
+    const [facebookLink, setFacebookLink] = useState(user?.facebook);
+    const [userInfo, setUserInfo] = useState(null);
+    const [error, setError] = useState(null);
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        switch (name) {
+            case "website":
+                setWebsiteLink(value);
+                break;
+            case "github":
+                setGitHubLink(value);
+                break;
+            case "x":
+                setTwitterLink(value);
+                break;
+            case "instagram":
+                setInstagramLink(value);
+                break;
+            case "facebook":
+                setFacebookLink(value);
+                break;
+            default:
+                break;
+        }
+    };
+    const handleSaveChanges = async () => {
+        console.log("Saving changes...");
+        const updatedUser = {
+            ...user,
+            site: websiteLink,
+            github: githubLink,
+            x: twitterLink,
+            instagram: instagramLink,
+            facebook: facebookLink,
+        };
+        const req = await setUser(updatedUser);
+        console.log(req);
+    };
+
     return (
         <div className="card mt-3">
             <ul className="list-group list-group-flush">
@@ -22,14 +72,26 @@ export default function Socials() {
                         </svg>
                         Website
                     </h6>
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://github.com/NacerEddine-19"
-                        className="text-secondary"
-                    >
-                        NacerEddine-19
-                    </a>
+                    {!pathname.includes('/edit') ? (
+                        <>
+
+                            {websiteLink ? <a
+                                rel="noreferrer"
+                                target="_blank"
+                                href={websiteLink}
+                                className="text-secondary"
+                            >
+                                {user?.nom}
+                            </a> : null}
+                        </>
+                    ) : <input
+                        type="text"
+                        name="website"
+                        className="form-control"
+                        onChange={handleInputChange}
+                        value={websiteLink}
+                        placeholder="enter your website link" />
+                    }
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 className="mb-0">
@@ -49,41 +111,61 @@ export default function Socials() {
                         </svg>
                         Github
                     </h6>
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://github.com/NacerEddine-19"
-                        className="text-secondary"
-                    >
-                        NacerEddine-19
-                    </a>
+                    {!pathname.includes('/edit') ? (
+                        <>
+
+                            {githubLink ? <a
+                                rel="noreferrer"
+                                target="_blank"
+                                href={githubLink}
+                                className="text-secondary"
+                            >
+                                {user?.nom}
+                            </a> : null}
+                        </>
+                    ) : <input
+                        type="text"
+                        name="github"
+                        className="form-control"
+                        onChange={handleInputChange}
+                        value={githubLink}
+                        placeholder="enter your github link" />
+                    }
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 className="mb-0">
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
+                            width="22"
+                            height="22"
+                            viewBox="0 0 300 300"
                             stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="feather feather-twitter mr-2 icon-inline text-info"
-                        >
-                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                            strokeWidth="5"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
                         </svg>
                         Twitter
                     </h6>
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://twitter.com/NacerEd94535091"
-                        className="text-secondary"
-                    >
-                        @NacerEddine
-                    </a>
+                    {!pathname.includes('/edit') ? (
+                        <>
+
+                            {twitterLink ? <a
+                                rel="noreferrer"
+                                target="_blank"
+                                href={twitterLink}
+                                className="text-secondary"
+                            >
+                                {user?.nom}
+                            </a> : null}
+                        </>
+                    ) : <input
+                        type="text"
+                        name="x"
+                        className="form-control"
+                        onChange={handleInputChange}
+                        value={twitterLink}
+                        placeholder="enter your x link" />
+                    }
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 className="mb-0">
@@ -105,14 +187,26 @@ export default function Socials() {
                         </svg>
                         Instagram
                     </h6>
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://www.instagram.com/nacereddine__0/"
-                        className="text-secondary"
-                    >
-                        nacereddine__0
-                    </a>
+                    {!pathname.includes('/edit') ? (
+                        <>
+
+                            {instagramLink ? <a
+                                rel="noreferrer"
+                                target="_blank"
+                                href={instagramLink}
+                                className="text-secondary"
+                            >
+                                {user?.nom}
+                            </a> : null}
+                        </>
+                    ) : <input
+                        type="text"
+                        name="instagram"
+                        className="form-control"
+                        onChange={handleInputChange}
+                        value={instagramLink}
+                        placeholder="enter your instagram link" />
+                    }
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 className="mb-0">
@@ -132,16 +226,33 @@ export default function Socials() {
                         </svg>
                         Facebook
                     </h6>
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://web.facebook.com/nasser.majid.10"
-                        className="text-secondary"
-                    >
-                        Nacer Majid
-                    </a>
+                    {!pathname.includes('/edit') ? (
+                        <>
+
+                            {facebookLink ? <a
+                                rel="noreferrer"
+                                target="_blank"
+                                href={facebookLink}
+                                className="text-secondary"
+                            >
+                                {user?.nom}
+                            </a> : null}
+                        </>
+                    ) : <input
+                        type="text"
+                        name="facebook"
+                        className="form-control"
+                        onChange={handleInputChange}
+                        value={facebookLink}
+                        placeholder="enter your facebook link" />
+                    }
                 </li>
             </ul>
+            {pathname.includes("/edit") && (
+                <button className="btn btn-primary mt-3" onClick={handleSaveChanges}>
+                    Save
+                </button>
+            )}
         </div>
     );
 }

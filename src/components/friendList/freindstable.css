@@ -1,10 +1,14 @@
 input[type="text"] {
   padding: 10px;
+  margin-block: 10px;
   border: none;
   border-radius: 20px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   font-size: 16px;
   outline: none;
+}
+input[type="text"]:focus{
+  box-shadow: 1px 1px 1px rgba(0, 0, 0);
 }
 
 

@@ -94,7 +94,7 @@ export default function Login() {
       } else {
         setMsg(`Welcom back ${user.nom}`)
         setMsgType('success')
-        const role = user.role;
+        const role = user.role; 
         localStorage.setItem("role", role);
 
         if (["admin", "stagier"].includes(role)) {
