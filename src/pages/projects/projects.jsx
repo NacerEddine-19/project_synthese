@@ -1,17 +1,21 @@
 import { memo, useEffect, useState } from "react";
 import ProjectComponent from "../../components/projectComponent/projectComponent";
 import request from "../../utils/request";
+import { useLocation } from "react-router-dom";
+import { getUser } from "../../utils/helper";
 // import "./courses.css"
 const MemoizedProjectComponent = memo(ProjectComponent);
 const API = process.env.REACT_APP_SERVER_API;
 export default function Projects() {
+    const user = getUser();
+    const path = useLocation().pathname.slice(1) || '/';
     const [data, setData] = useState([]);
     const [offset, setOffset] = useState(0);
     const [loading, setLoading] = useState(true);
     const [isFetching, setIsFetching] = useState(false);
     const [total, setTotal] = useState(0);
     const [isEnd, setIsEnd] = useState(false);
-    console.log({data});
+    console.log({ path });
 
     const deleteProject = (id) => {
         console.log(id);
@@ -21,28 +25,41 @@ export default function Projects() {
                 alert('project deleted successfully')
             })
     }
-    const fetchProjects = () => {
-        request
-            .get(`${API}/projects`, {
-                params: {
-                    limit: 5,
-                    offset: offset,
-                },
-            })
-            .then((res) => {
-                // setData(response.data);
-                const { projects, total } = res?.data;
-                console.log(res);
-                setData((prev) => [...prev, ...projects]);
-                setTotal(total);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-            .finally(() => {
-                setLoading(false);
-                setIsFetching(false);
-            });
+    const fetchProjects = async () => {
+        let res;
+        try {
+            if (path === 'Projects') {
+                res = await request
+                    .get(`${API}/projects`, {
+                        params: {
+                            limit: 5,
+                            offset: offset,
+                        },
+                    })
+            } else if (path === 'Profile') {
+                const userId = user?.id
+                res = await request
+                    .get(`${API}/projects/user/${userId}`, {
+                        params: {
+                            limit: 5,
+                            offset: offset,
+                        },
+                    })
+            }
+            console.log({ res });
+            const projectsData = res?.data;
+            console.log({ projectsData });
+            const { projects, total } = projectsData;
+            console.log({ projects, total });
+            console.log(res);
+            setData((prev) => [...prev, ...projects]);
+            setTotal(total);
+        } catch (error) {
+            throw error;
+        } finally {
+            setLoading(false);
+            setIsFetching(false);
+        }
     };
 
     useEffect(() => {
@@ -75,7 +92,7 @@ export default function Projects() {
     useEffect(() => {
         setLoading(true);
         fetchProjects();
-    }, [offset]);
+    }, [offset, path]);
     return (
         <MemoizedProjectComponent
             loading={loading}

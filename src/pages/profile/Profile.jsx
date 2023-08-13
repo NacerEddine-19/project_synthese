@@ -46,9 +46,9 @@ export default function Profile() {
               <>
                 {activeTab === 'feed' && <Feed userP={user} />}
                 {activeTab === 'friends' && <FriendsTable />}
-                {activeTab === 'courses' && <Courses />}
+                {activeTab === 'courses' && <Courses profile />}
                 {activeTab === 'projects' && <Projects />}
-                {/* {activeTab === 'favorites' && <Favorites />} */}
+                {activeTab === 'favorites' && (<><h1>this is still under work</h1></>)}
               </>
             }
               activeTab={activeTab}

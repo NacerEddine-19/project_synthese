@@ -2,7 +2,7 @@ import { Favorite, FavoriteBorderRounded } from '@material-ui/icons';
 import './courses.css'
 import React, { useState } from 'react';
 
-export default function CoursesComponent() {
+export default function CoursesComponent({profile}) {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
@@ -191,6 +191,7 @@ export default function CoursesComponent() {
 
     return (
         <div className="container courses">
+            {profile && (<><h1>this is still under work</h1></>)}
             <div className="coursesWraper">
                 <div className="row justify-content-center mt-4">
                     <div className="input-group mb-3">
