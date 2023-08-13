@@ -4,9 +4,10 @@ import './projectComponent.css'; // Styling
 import TagInputComponent from '../tagInput/tagInput';
 import request from '../../utils/request';
 import { getUser } from '../../utils/helper';
+import LoadingIcon from '../loadingIcon/loadingIcon';
 
 const API = process.env.REACT_APP_SERVER_API;
-export default function ProjectComponent({ data, deleteProject, fetchProjects }) {
+export default function ProjectComponent({ isEnd, isFetching, loading, data, deleteProject, fetchProjects }) {
     const [user] = useState(getUser());
     const [friends, setFriends] = useState([])
     const [suggestionsFriends, setSuggestionsFriends] = useState([]);
@@ -156,10 +157,10 @@ export default function ProjectComponent({ data, deleteProject, fetchProjects })
     //handle tag change
     const handleTagsChange = useCallback((tags, property) => {
         setNewProject((prevProject) => ({
-          ...prevProject,
-          [property]: tags.map((tag) => tag.id),
+            ...prevProject,
+            [property]: tags.map((tag) => tag.id),
         }));
-      }, []);
+    }, []);
     // console.log({friends});
     useEffect(() => {
         setSuggestionsFriends(friends?.map(user => {
@@ -180,8 +181,9 @@ export default function ProjectComponent({ data, deleteProject, fetchProjects })
             setSuggestionsLanguages([]);
         };
     }, [friends, languages]);
-    // console.log({ suggestionsFriends });
-    // console.log({ suggestionsLanguages });
+
+    //pagination
+
     return (
         <div className="project-component">
             <div className="header">
@@ -239,37 +241,43 @@ export default function ProjectComponent({ data, deleteProject, fetchProjects })
                     )}
                 </div>
             </div>
-
-            <div className="project-list">
-                {filteredProjects.map((project, index) => (
-                    <div className="project card" key={index}>
-                        <div className="card-body">
-                            <div className="card-info">
-                                <div className="card-info-left">
-                                    <h2 className="card-title">{project.name}</h2>
-                                    <p className="card-text">users: {project.users?.map((member, idx) => (<span key={idx}>{member.nom}</span>))}</p>
-                                    <p className="card-text">Languages: {project.languages?.map((lang, idx) => (<span key={idx}>{lang.name}</span>))}</p>
+            {loading && !isFetching ? (<LoadingIcon />) : (
+                <div className="project-list">
+                    {filteredProjects.map((project, index) => (
+                        <div className="project card" key={index}>
+                            <div className="card-body">
+                                <div className="card-info">
+                                    <div className="card-info-left">
+                                        <h2 className="card-title">{project.name}</h2>
+                                        <p className="card-text">users: {project.users?.map((member, idx) => (<span key={idx}>{member.nom}</span>))}</p>
+                                        <p className="card-text">Languages: {project.languages?.map((lang, idx) => (<span key={idx}>{lang.name}</span>))}</p>
+                                    </div>
+                                    <div className="card-info-right">
+                                        <button className="btn btn-success" onClick={handleDownload}>
+                                            <FaFileDownload className="download-icon" />
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="card-info-right">
-                                    <button className="btn btn-success" onClick={handleDownload}>
-                                        <FaFileDownload className="download-icon" />
+                                <div className="card-footer">
+                                    <button className="btn btn-primary" onClick={() => handleVote(index, 'like')}>
+                                        <FaThumbsUp className="like-icon" />
+                                        <span className="vote-count">{project.likes}</span>
+                                    </button>
+                                    <button className="btn btn-danger" onClick={() => handleVote(index, 'dislike')}>
+                                        <FaThumbsDown className="dislike-icon" />
+                                        <span className="vote-count">{project.dislikes}</span>
                                     </button>
                                 </div>
                             </div>
-                            <div className="card-footer">
-                                <button className="btn btn-primary" onClick={() => handleVote(index, 'like')}>
-                                    <FaThumbsUp className="like-icon" />
-                                    <span className="vote-count">{project.likes}</span>
-                                </button>
-                                <button className="btn btn-danger" onClick={() => handleVote(index, 'dislike')}>
-                                    <FaThumbsDown className="dislike-icon" />
-                                    <span className="vote-count">{project.dislikes}</span>
-                                </button>
-                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            )}
+            {isFetching ? (
+                <LoadingIcon />
+            ) : isEnd ? (
+                <div>Feeling inspired? Create your own Project!</div>
+            ) : ''}
         </div>
     );
 }

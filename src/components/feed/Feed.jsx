@@ -87,7 +87,6 @@ export default function Feed({ userP, group }) {
   }, [isFetching]);
 
   useEffect(() => {
-    console.log(group);
     if (group) {
       request.get(`${API}/groups/${user?.group}`)
         .then(({ data }) => {
