@@ -13,8 +13,8 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
-  const [msg, setMsg] = useState(null);
-  const [msgType, setMsgType] = useState(null);
+  const [msg, setToastMsg] = useState(null);
+  const [msgType, setToastMsgType] = useState(null);
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -47,32 +47,26 @@ export default function Login() {
           email,
           password,
         });
+        console.log(response);
 
         if (response.status === 200) {
           const data = response.data;
           if (data && data.length > 0) {
             const user = data[0];
             if (user.is_banned) {
-              setMsg('User is banned. Please contact support.')
-              setMsgType('warning')
               console.error("User is banned. Please contact support.");
               return;
             }
             setUser(user);
-          } else {
-            setMsg("No user found")
-            setMsgType('error')
-            console.error("No user found");
           }
         } else {
-          setMsg("Error occurred during login")
-          setMsgType('warning')
           console.error("Error occurred during login");
         }
       } catch (error) {
-        setMsg(error.response.data.message)
-        setMsgType('error')
-        console.error({ error });
+        // console.log(error.response.data);
+        setToastMsg(error.response.data.message)
+        setToastMsgType(error.response.data.type)
+        console.error(error.response);
       }
     },
     [email, password]
@@ -92,9 +86,9 @@ export default function Login() {
       if (user.first_time === 1) {
         navigate("/changePassword");
       } else {
-        setMsg(`Welcom back ${user.nom}`)
-        setMsgType('success')
-        const role = user.role; 
+        // setToastMsg(`Welcom back ${user.nom}`)
+        // setToastMsgType('success')
+        const role = user.role;
         localStorage.setItem("role", role);
 
         if (["admin", "stagier"].includes(role)) {

@@ -76,7 +76,10 @@ export function EditProfile() {
                 <div className="row"> <div className="col-md-3 border-right">
 
                     <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-                        <img className="rounded-circle" width={150} height={150} src={user?.pdp} alt='profile pic' />
+                        <div className="profile-img-edit">
+                            <img className="rounded-circle" width={150} height={150} src={user?.pdp} alt='profile pic' />
+                            <span className='camera-icon'>555</span>
+                        </div>
                         <span className="font-weight-bold">{user?.nom} {user?.prenom}</span>
                         <span> </span></div> </div>
                     <div className="col-md-5 border-right">

@@ -23,7 +23,6 @@ export default function ProjectComponent({ isEnd, isFetching, loading, data, del
         languages: [],
         file: null
     });
-    console.log({ projects });
     useEffect(() => {
         setUser_id(user?.id);
         return () => {

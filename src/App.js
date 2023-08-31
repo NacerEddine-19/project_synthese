@@ -32,6 +32,7 @@ function App() {
           <Route exact path="/Courses" element={<Courses />} />
           <Route exact path="/Projects" element={<Projects />} />
           <Route exact path="/Events" element={<EventsPage />} />
+          <Route exact path="/Chats" element={<Test />} />
           <Route exact path="/Group" element={<Group />} />
           <Route exact path="/posts/:postId" element={<ViewPostPage />} />
         </Route>

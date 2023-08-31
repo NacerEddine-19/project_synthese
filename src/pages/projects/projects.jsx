@@ -15,7 +15,6 @@ export default function Projects() {
     const [isFetching, setIsFetching] = useState(false);
     const [total, setTotal] = useState(0);
     const [isEnd, setIsEnd] = useState(false);
-    console.log({ path });
 
     const deleteProject = (id) => {
         console.log(id);
@@ -28,7 +27,7 @@ export default function Projects() {
     const fetchProjects = async () => {
         let res;
         try {
-            if (path === 'Projects') {
+            if (path === 'Projects' || path === 'projects') {
                 res = await request
                     .get(`${API}/projects`, {
                         params: {
@@ -36,7 +35,7 @@ export default function Projects() {
                             offset: offset,
                         },
                     })
-            } else if (path === 'Profile') {
+            } else if (path === 'Profile' || path === 'profile') {
                 const userId = user?.id
                 res = await request
                     .get(`${API}/projects/user/${userId}`, {
@@ -46,12 +45,8 @@ export default function Projects() {
                         },
                     })
             }
-            console.log({ res });
             const projectsData = res?.data;
-            console.log({ projectsData });
             const { projects, total } = projectsData;
-            console.log({ projects, total });
-            console.log(res);
             setData((prev) => [...prev, ...projects]);
             setTotal(total);
         } catch (error) {

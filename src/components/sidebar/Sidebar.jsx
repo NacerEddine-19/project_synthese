@@ -50,17 +50,19 @@ export default function Sidebar() {
             </Link>
           </li>
           <li className="sidebarListItem">
-            <Chat className="sidebarIcon" />
-            <span className="sidebarListItemText">Chats</span>
+            <Link to={`/Chats`}>
+              <Chat className="sidebarIcon" />
+              <span className="sidebarListItemText">Chats</span>
+            </Link>
           </li>
           <li className="sidebarListItem">
-            <Link to={`/projects`}>
+            <Link to={`/Projects`}>
               <SourceRoundedIcon className="sidebarIcon" />
               <span className="sidebarListItemText">Projects</span>
             </Link>
           </li>
           <li className="sidebarListItem">
-            <Link to={`/courses`}>
+            <Link to={`/Courses`}>
               <School className="sidebarIcon" />
               <span className="sidebarListItemText">Courses</span>
             </Link>

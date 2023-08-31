@@ -79,7 +79,7 @@ export default function MainDash() {
     // Create an array to store the project counts for each language
     const projectCountsByLanguage = languages.map(language => {
         // Filter the projects array to get projects associated with the current language
-        const projectsInLanguage = projects.filter(project => {
+        const projectsInLanguage = projects?.filter(project => {
             return project.languages.some(lang => lang.name === language);
         });
 
@@ -197,7 +197,7 @@ export default function MainDash() {
         request.get(`${API}/posts`)
             .then(res => setPosts(res?.data?.posts));
         request.get(`${API}/projects`)
-            .then(res => setProjects(res?.data))
+            .then(res => setProjects(res?.data.projects))
         request.get(`${API}/reports`)
             .then(res => setReports(res?.data))
         return () => {
@@ -208,7 +208,7 @@ export default function MainDash() {
         };
     }, []);
     useEffect(() => {
-        if (users.length > 0 && posts.length > 0 && projects.length > 0 && reports.length > 0) {
+        if (users.length > 0 && posts.length > 0 && projects?.length > 0 && reports.length > 0) {
             setUsersPercentage(calculateReportsPercentageDifference(users))
             setPostsPercentage(calculateReportsPercentageDifference(posts))
             setProjectsPercentage(calculateReportsPercentageDifference(projects))
@@ -222,7 +222,7 @@ export default function MainDash() {
         };
     }, [users, posts, projects, reports]);
     useEffect(() => {
-        if (users.length > 0 && posts.length > 0 && projects.length > 0 && reports.length > 0) {
+        if (users.length > 0 && posts.length > 0 && projects?.length > 0 && reports.length > 0) {
             setUsersCountPerMonth(getItemsCountPerMonth(users))
             setProjectsCountPerMonth(getItemsCountPerMonth(projects))
             setPostsCountPerMonth(getItemsCountPerMonth(posts))

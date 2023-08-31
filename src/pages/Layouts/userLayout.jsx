@@ -6,13 +6,14 @@ export default function UserLayout({ children }) {
     const pathname = window.location.pathname;
 
     const isProfilePage = pathname.includes('/Profile');
+    const isChats = pathname.includes('/Chats');
     return (
         <>
             <Topbar />
             <div className="homeContainer">
-                <Sidebar />
+                {!isChats && <Sidebar />}
                 {children}
-                {!isProfilePage && <Rightbar />}
+                {!isProfilePage && !isChats && <Rightbar />}
             </div>
         </>
     )
